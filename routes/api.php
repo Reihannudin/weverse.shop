@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Http\Request;
@@ -21,6 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Banner
+Route::get('/banner' , [BannerController::class , 'index']);
+
 //Product
 Route::get('/product' , [ProductController::class , 'index']);
 
@@ -29,3 +33,4 @@ Route::get('/artist' , [ArtistController::class  , 'index']);
 
 //Type
 Route::get('/type' , [TypeController::class  , 'index']);
+
