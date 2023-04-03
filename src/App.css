@@ -7,6 +7,32 @@
   pointer-events: none;
 }
 
+.weverse-color{
+  color: #05DCB5;
+}
+
+.weverse-background{
+  background: #05DCB5;
+}
+
+.weverse-background-btn{
+  background: #08CCCA;
+}
+
+.border-radius-20{
+  border-radius: 20px;
+}
+
+.border-radius-8{
+  border-radius: 8px;
+}
+
+.border-radius-12{
+  border-radius: 12px;
+}
+
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
