@@ -27,10 +27,11 @@ Route::get('/banner' , [BannerController::class , 'index']);
 
 //Product
 Route::get('/product' , [ProductController::class , 'index']);
+Route::get('/shop/{artist_id}' , [ProductController::class , 'show']);
+Route::get('/shop/{artist_id}/categories/{categories_id}/type/{type_id}' , [ProductController::class , 'showByCategoryAndType']);
+Route::get('/shop/{artist_id}/categories/{categories_id}' , [ProductController::class , 'showByCategory']);
+Route::get('/shop/{artist_id}/type/{type_id}' , [ProductController::class , 'showByType']);
+
 
 //Artist
 Route::get('/artist' , [ArtistController::class  , 'index']);
-
-//Type
-Route::get('/type' , [TypeController::class  , 'index']);
-
