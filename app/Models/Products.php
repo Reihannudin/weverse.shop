@@ -27,4 +27,13 @@ class Products extends Model
         return $this->belongsTo(Types::class);
     }
 
+    public function description_images(){
+        return $this->belongsToMany(DescImage::class , 'desc_image_products' , 'product_id' , 'desc_image_id');
+    }
+
+    //    public function categories(){
+//        return $this->belongsToMany(Categories::class , 'pivot_artist_categories' , 'artist_id' ,
+//            'categories_id');
+//    }
+
 }

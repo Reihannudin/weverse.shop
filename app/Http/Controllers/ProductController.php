@@ -17,12 +17,14 @@ class ProductController extends Controller
         return $product;
     }
 
-    public function show($artist_id){
+    public function show($artist_id , $product_id){
         $product = ProductResource::collection(
-            Products::query()->where('artist_id' , $artist_id)->get()
+            Products::query()->where('artist_id' , $artist_id)->where('id' , $product_id)->get()
         );
+
         return response()->json($product);
     }
+
 
     public function showByCategoryAndType($artist_id , $categories_id, $type_id){
         $product = ProductResource::collection(
