@@ -1,11 +1,16 @@
 import {useEffect, useState} from "react";
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import Shop from "../../pages/Shop";
 
 export const ArtistCardComponent = (props) => {
 
     return(
         <>
-            <div className="w-full  my-4 flex" style={{ height: "90px"}}>
-                <div style={{ height: "80px" ,  width: "80px", borderRadius: "100%"}} >
+            {/*<Routes>*/}
+            {/*    <Route path="/shop/:artistId" element={<Shop artistId={props.id} />}></Route>*/}
+            {/*</Routes>*/}
+            <div className="w-full  my-4 flex" style={{ height: "100px"}}>
+                <div style={{ height: "90px" ,  width: "90px", borderRadius: "100%"}} >
                     <img className="w-full h-full" src={props.image}
                          style={{ borderRadius: "100%"}} alt="logo"/>
                 </div>
@@ -13,12 +18,15 @@ export const ArtistCardComponent = (props) => {
                     <div className="align-items-center ms-4 my-auto ">
                         <h5 className="font-bold mb-2 py-0" style={{ fontSize:"20px"}}>{props.name}</h5>
                         <div className="py-0 mt-0 mb-2 flex">
-                            <div className="flex me-4 gap-2" style={{borderRight: "1px solid #858888"}}>
-                                <div >
-                                    <i className="fa-solid h-full fa-globe" style={{ fontSize:"17px"}}></i>
+                            <Link to={`/shop/${props.id}`}   >
+                                {/*//element={<Shop artistId={} />}*/}
+                                <div className="flex me-4 gap-2" style={{borderRight: "1px solid #858888"}}>
+                                    <div >
+                                        <i className="fa-solid h-full fa-globe" style={{ fontSize:"17px"}}></i>
+                                    </div>
+                                    <h6 style={{marginTop: "1px" , marginRight: "8px"}}>GLOBAL</h6>
                                 </div>
-                                <h6 style={{marginTop: "1px" , marginRight: "8px"}}>GLOBAL</h6>
-                            </div>
+                            </Link>
                             <div className="flex pe-4 gap-2 " style={{borderRight: "1px solid #858888"}}>
                                 <div className="mt-1" style={{height: "20px"}}>
                                     <img src="/assets/indonesia-flag.svg" className="h-full"

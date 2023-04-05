@@ -7,7 +7,7 @@ function Home(){
     return(
         <>
             <NavigationComponent />
-            <div >
+            <div>
                 <BannerListComponent />
                 <ArtistListComponent />
             </div>

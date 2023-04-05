@@ -31,7 +31,7 @@ export const ArtistListComponent = () => {
                     <div className="py-6 mx-7 grid grid-cols-2">
                         {artist.map((item) => {
                             return(
-                                    <ArtistCardComponent image={item.image} name={item.name}/>
+                                    <ArtistCardComponent id={item.id} image={item.image} name={item.name}/>
                             )
                         })}
                     </div>

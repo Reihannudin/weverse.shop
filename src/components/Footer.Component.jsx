@@ -5,8 +5,8 @@ export const FooterComponent = () => {
         <>
             <footer className="w-full py-6" style={{ background:"#FAFBFC"}}>
                 <div className="w-10/12 mx-auto">
-                    <div className="w-6/12 mx-auto">
-                        <ul className="flex gap-5 mx-auto" style={{ fontSize:"15px"}}>
+                    <div className="w-5/12 mx-auto">
+                        <ul className="flex gap-5 font-medium mx-auto" style={{ fontSize:"13px" , color:"#8a8a8a"}}>
                             <li className="mx-auto">
                                 <Link>
                                     <span>Privacy Policy</span>
@@ -30,7 +30,7 @@ export const FooterComponent = () => {
                         </ul>
                     </div>
                     <div className="w-10/12 my-7 mx-auto">
-                        <p className="text-center" style={{ fontSize:"13px"}}>
+                        <p className="text-center font-normal" style={{ fontSize:"12px" ,  color:"#706f6f"}}>
                             COMPANYWEVERSE COMPANY Inc.CEOJOON WON CHOICALL CENTER(+82)-2-2097-1830FAX(+82)-2-2144-9399ADDRESSC, 6F, PangyoTech-onetower, 131, Bundangnaegok-ro, Bundang-gu, Seongnam-si, Gyeonggi-do, Republic of KoreaPERSONAL INFORMATION OFFICERRyeo, Sung Koo (privacy@weverseshop.io)BUSINESS REGISTRATION NUMBER716-87-01158 Business RegistrationMAIL ORDER BUSINESS REGISTRATION NUMBER2022-Seongnam Bundang A-0557HOSTED BYAmazon Web Services, Inc.
                             <br/>
                             <br/>
@@ -40,8 +40,8 @@ export const FooterComponent = () => {
                             Copyright by WEVERSE COMPANY INC. or its affiliates (WEVERSE JAPAN & WEVERSE AMERICA Inc) All rights reserved.
                         </p>
                     </div>
-                    <div>
-                        <span  style={{ fontSize:"14px"}}>© WEVERSE COMPANY Inc.</span>
+                    <div >
+                        <span className="font-medium" style={{ fontSize:"13px" ,  color:"#565656"}}>© WEVERSE COMPANY Inc.</span>
                     </div>
                 </div>
             </footer>
