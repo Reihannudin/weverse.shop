@@ -1,4 +1,4 @@
-import {ProductCardComponent, ProductCardCOmponent} from "./Card/ProductCard.COmponent";
+import {ProductCardComponent} from "./Card/ProductCard.Component";
 import {useEffect, useState} from "react";
 
 export const ProductListComponent = ({id}) => {
@@ -29,7 +29,7 @@ export const ProductListComponent = ({id}) => {
                                     {product.map((item) => {
                                         return(
                                             <>
-                                                <ProductCardComponent name={item.name} image={item.image} price={item.price} />
+                                                <ProductCardComponent artist_id={item.artist_id} product_id={item.id} name={item.name} image={item.image} price={item.price} />
                                             </>
                                         )
                                     })}

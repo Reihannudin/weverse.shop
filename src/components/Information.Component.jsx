@@ -1,5 +1,5 @@
 
-export const InformationComponent = () => {
+export const InformationComponent = (props) => {
     return(
         <>
             <div className="w-9/12 mb-14 mx-auto">
@@ -22,7 +22,7 @@ export const InformationComponent = () => {
                             <table  className="w-full my-6" >
                                 <tr className="w-full" style={{ borderTop:"1px solid #ebebeb" , fontSize:"14px", borderBottom:"1px solid #ebebeb"}}>
                                     <th className="py-2 w-1/5 font-normal px-5 " style={{ background:"#FAFBFC" , color:"#202429"}}  >Product Name</th>
-                                    <td className="py-2 w-4/5 px-3" >Overlayer Poster</td>
+                                    <td className="py-2 w-4/5 px-3" >{props.product_name}</td>
                                 </tr>
                                 <tr className="w-full" style={{ borderTop:"1px solid #ebebeb" , fontSize:"14px", borderBottom:"1px solid #ebebeb"}}>
                                     <th className="py-2 w-1/5 font-normal px-5 " style={{ background:"#FAFBFC" , color:"#202429"}}  >Product material</th>

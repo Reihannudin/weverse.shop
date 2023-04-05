@@ -1,10 +1,12 @@
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 export const ProductCardComponent = (props) =>
 {
+
     return (
         <>
-            <Link to="/">
+            <Link to={`/shop/${props.artist_id}/product/${props.product_id}/v`}>
                 <div className="w-full">
                     <div>
                         <div>
