@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,9 @@ Route::get('/shop/{artist_id}/type/{type_id}' , [ProductController::class , 'sho
 
 //Artist
 Route::get('/artist' , [ArtistController::class  , 'index']);
+//Route::get('/shop/{artist_id}' , [ArtistController::class , 'show']);
+
+
+//Categories
+Route::get('/shop/{artist_id}/categories' , [ShopController::class , 'categoriesByArtist']);
+Route::get('/shop/{artist_id}/type' , [ShopController::class , 'typeByArtist']);

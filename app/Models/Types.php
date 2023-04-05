@@ -11,8 +11,4 @@ class Types extends Model
 
     protected $guarded = [];
 
-    public function artist(){
-        return $this->belongsTo(Artists::class);
-    }
-
 }

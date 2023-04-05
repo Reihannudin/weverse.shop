@@ -11,4 +11,10 @@ class Artists extends Model
 
     protected $guarded = [];
 
+
+//    public function categories(){
+//        return $this->belongsToMany(Categories::class , 'pivot_artist_categories' , 'artist_id' ,
+//            'categories_id');
+//    }
+
 }
