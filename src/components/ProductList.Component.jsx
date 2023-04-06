@@ -12,6 +12,7 @@ export const ProductListComponent = ({id}) => {
             .then((product => setProduct(product)))
     } , [id])
 
+
     return(
         <>
             <div className="w-full">
