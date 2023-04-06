@@ -19,6 +19,7 @@ class ShopController extends Controller
         $product = ProductResource::collection(
             Products::query()->where('artist_id' , $artist_id)->get()
         );
+
         return response()->json($product);
     }
 

@@ -11,4 +11,7 @@ class Types extends Model
 
     protected $guarded = [];
 
+
+
+
 }

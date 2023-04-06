@@ -21,16 +21,19 @@ class ArtistController extends Controller
     }
 
     public function show($artist_id){
-//        $artist = ArtistResource::collection(
-//            Artists::query()->where('id' , $artist_id)->get()
-//        );
-
-//
-        $product = ProductResource::collection(
-            Products::query()->where('artist_id' , $artist_id)->get()
+        $artist = ArtistResource::collection(
+            Artists::query()->where('id' , $artist_id)->get()
         );
-        return response()->json($product);
+
+        $categories = CategoryResource::collection(
+            Categories::query()->where('artist_id' , $artist_id)->get()
+        );
+
+        $data = compact('artist', 'categories');
+
+        return response()->json($data);
     }
+
 
 
 }

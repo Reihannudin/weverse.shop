@@ -25,9 +25,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/banner' , [BannerController::class , 'index']); // success
 Route::get('/artist' , [ArtistController::class  , 'index']); // success
+//Route::get('/artist/{artist_id}' , [ArtistController::class , 'show']);
+
 Route::get('/shop/{artist_id} ' , [ShopController::class , 'show']); // success
 Route::get('/shop/{artist_id}/product/{product_id}/v' , [ProductController::class , 'show']);  // success
 Route::get('/shop/{artist_id}/categories' , [ShopController::class , 'categoriesByArtist']); // success
+Route::get('/shop/{artist_id}/categories/{categories_id}' , [ProductController::class , 'showByCategory']);
 Route::get('/shop/{artist_id}/type' , [ShopController::class , 'typeByArtist']); // success
 
 Route::get('/product' , [ProductController::class , 'index']); // testing

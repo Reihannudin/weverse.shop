@@ -12,8 +12,17 @@ class Categories extends Model
     protected $guarded = [];
 
     public function type(){
-        return $this->hasMany(Types::class);
+        return $this->belongsToMany(Types::class , 'type_categories' , 'artist_categories_id' ,
+            'type_id');
     }
+
+    public function product(){
+        return $this->belongsToMany(Products::class , 'type_product' , 'type_id' ,
+            'product_id');
+    }
+
+
+
 
 
 }

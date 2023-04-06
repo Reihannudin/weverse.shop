@@ -20,11 +20,6 @@ class ArtistResource extends JsonResource
             'slug' => $this->slug,
             'agency' => $this->agency,
             'image' => $this->image ,
-//            'categories' => [
-//                $this->categories,
-////                'subCategory' =>  $this->categories->type,
-//            ],
-            'product' => $this->product,
             'description' => $this->description,
             'created_at' => $this->created_at->toDateString(),
             'updated_at' => $this->updated_at->toDateString(),
