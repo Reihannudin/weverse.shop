@@ -1,7 +1,9 @@
 import {ProductCardComponent} from "./Card/ProductCard.Component";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
 export const ProductListComponent = ({id}) => {
+
     const [product , setProduct ] = useState([])
 
     useEffect(() => {
@@ -29,7 +31,9 @@ export const ProductListComponent = ({id}) => {
                                     {product.map((item) => {
                                         return(
                                             <>
-                                                <ProductCardComponent artist_id={item.artist_id} product_id={item.id} name={item.name} image={item.image} price={item.price} />
+                                                <div key={item.id} >
+                                                    <ProductCardComponent artist_id={item.artist_id} product_id={item.id} name={item.name} image={item.image} price={item.price} />
+                                                </div>
                                             </>
                                         )
                                     })}

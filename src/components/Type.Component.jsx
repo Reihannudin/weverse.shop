@@ -11,27 +11,8 @@ export const TypeComponent = ({id}) =>{
             .then((type => setType(type)))
     } , [id])
 
-    console.log(type)
-
     return(
         <>
-            <div className="w-full" style={{ borderBottom:"1px solid #ebebeb", background:"#FAFBFC"}}>
-                <div className="w-10/12 py-4 mx-auto">
-                    <div className="mx-4">
-                        <ul className="flex py-0 gap-8">
-                            {type.map((item) => {
-                                return(
-                                    <li>
-                                        <Link>
-                                            <h4 className="font-normal text-gray-500" style={{ fontSize:"12px"}}>{item.name}</h4>
-                                        </Link>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </>
     )
 }
