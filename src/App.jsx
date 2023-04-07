@@ -8,6 +8,14 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import TabsRender from "./components/Tabs.Component.Test";
 import ShopCategory from "./pages/ShopCategory";
+import Address from "./pages/Address";
+import Support from "./pages/Support";
+import Return from "./pages/Return";
+import Order from "./pages/Order";
+import Cart from "./pages/Cart";
+import {AnnouncementsCardComponent} from "./components/Card/AnnouncementsCard.Component";
+import Announcement from "./pages/Announcement";
+import Events from "./pages/Events";
 function App() {
 
   return(
@@ -19,6 +27,14 @@ function App() {
               <Route path="/shop/:id/product/:product_id/v/" element={<View />}></Route>
               <Route path="/login" element={<Login />}/>
               <Route path="/signup" element={<SignUp />}/>
+              <Route path="/cart" element={<Cart />}></Route>
+              <Route path="/order/history" element={<Order />}></Route>
+              <Route path="/order/returnExchange/history" element={<Return />}></Route>
+              <Route path="/support" element={<Support />}></Route>
+              <Route path="/my/addresses" element={<Address />}></Route>
+              <Route path="/notice" element={<Announcement />}></Route>
+              <Route path="/events" element={<Events />}></Route>
+
 
 
               <Route path="/testing" element={<TabsRender />}></Route>

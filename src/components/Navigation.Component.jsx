@@ -37,7 +37,7 @@ export const NavigationComponent = ({id}) => {
                                      </button>
                                     <div id="defaultModal" tabIndex="-1" aria-hidden="true" style={{ background:"rgba(75,75,75,0.67)" }} className="fixed z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
                                         <div className="absolute w-6/12 mx-auto h-full max-w-2xl md:h-auto" style={{ left:"33%"}}>
-                                            <div className="relative bg-white w-8/12 rounded-lg shadow dark:bg-gray-700">
+                                            <div className="relative bg-white w-8/12 rounded-lg shadow dark:bg-gray-700" style={{ height:"500px"}} >
                                                 <div className="flex items-start justify-end py-7 px-4 border-b rounded-t dark:border-gray-600">
                                                     <h3 className="text-xl font-bold w-full ms-5 font-semibold text-center text-gray-900 dark:text-white">
                                                         Select Shop
@@ -51,52 +51,55 @@ export const NavigationComponent = ({id}) => {
                                                     <p className="text-center text-gray-500" style={{ fontSize:"13px"}}>Select artist shop to move to the
                                                         main page of the artist shop.</p>
                                                 </div>
-                                                <div className="w-4/5 mx-auto">
-                                                    <li className="mx-3 my-5 list-none">
-                                                        <div className="w-full block gap-4">
-                                                            <div className="flex gap-2">
-                                                                <div style={{ width:"28px" ,height:"28px" , borderRadius:"100%"}}>
-                                                                    <img style={{  borderRadius:"100%"}} className="w-full h-full" src="https://cdn-contents.weverseshop.io/public/shop/88b0601c7d5a06f90bfec4b0dfe92dbf.jpg" alt="BTS" />
+                                                <div className="w-4/5 mx-auto" style={{ height:"260px" , overflowY:"scroll"}}>
+                                                    {artist.map((item) => {
+                                                        return(
+                                                            <li className="mx-3 my-5 list-none">
+                                                                <div className="w-full block gap-4">
+                                                                    <div className="flex gap-2">
+                                                                        <div style={{ width:"28px" ,height:"28px" , borderRadius:"100%"}}>
+                                                                            <img style={{  borderRadius:"100%"}} className="w-full h-full" src={item.image} alt={item.name} />
+                                                                        </div>
+                                                                        <h3 style={{ fontSize:"18px"}} className="font-normal">{item.name}</h3>
+                                                                    </div>
+                                                                    <div className="my-3">
+                                                                        <div className="flex gap-4">
+                                                                            <button className="px-3 py-1 " style={{ border:"1px solid #ebebeb" , borderRadius:"18px"}}>
+                                                                                <Link to="">
+                                                                                    <div className="flex gap-2">
+                                                                                        <div>
+                                                                                            <i style={{ fontSize:"16px" , color:"rgba(97,255,216,0.78)"}} className="fa-solid fa-globe"></i>
+                                                                                        </div>
+                                                                                        <p className="my-auto" style={{ fontSize:"14px"}}>GLOBAL</p>
+                                                                                    </div>
+                                                                                </Link>
+                                                                            </button>
+                                                                            <button className="px-3 py-1 " style={{ border:"1px solid #ebebeb" , borderRadius:"18px"}}>
+                                                                                <Link to="">
+                                                                                    <div className="flex gap-2">
+                                                                                        <div>
+                                                                                            <i style={{ fontSize:"16px" , color:"rgba(97,255,216,0.78)"}} className="fa-solid fa-globe"></i>
+                                                                                        </div>
+                                                                                        <p className="my-auto" style={{ fontSize:"14px"}}>USA</p>
+                                                                                    </div>
+                                                                                </Link>
+                                                                            </button>
+                                                                            <button className="px-3 py-1 " style={{ border:"1px solid #ebebeb" , borderRadius:"18px"}}>
+                                                                                <Link to="">
+                                                                                    <div className="flex gap-2">
+                                                                                        <div>
+                                                                                            <i style={{ fontSize:"16px" , color:"rgba(97,255,216,0.78)"}} className="fa-solid fa-globe"></i>
+                                                                                        </div>
+                                                                                        <p className="my-auto" style={{ fontSize:"14px"}}>JAPAN</p>
+                                                                                    </div>
+                                                                                </Link>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <h3 style={{ fontSize:"18px"}} className="font-normal">BTS</h3>
-                                                            </div>
-                                                            <div className="my-3">
-                                                                <div className="flex gap-4">
-                                                                    <button className="px-3 py-1 " style={{ border:"1px solid #ebebeb" , borderRadius:"18px"}}>
-                                                                        <Link to="">
-                                                                            <div className="flex gap-2">
-                                                                                <div>
-                                                                                    <i style={{ fontSize:"16px" , color:"rgba(97,255,216,0.78)"}} className="fa-solid fa-globe"></i>
-                                                                                </div>
-                                                                                <p className="my-auto" style={{ fontSize:"14px"}}>GLOBAL</p>
-                                                                            </div>
-                                                                        </Link>
-                                                                    </button>
-                                                                    <button className="px-3 py-1 " style={{ border:"1px solid #ebebeb" , borderRadius:"18px"}}>
-                                                                        <Link to="">
-                                                                            <div className="flex gap-2">
-                                                                                <div>
-                                                                                    <i style={{ fontSize:"16px" , color:"rgba(97,255,216,0.78)"}} className="fa-solid fa-globe"></i>
-                                                                                </div>
-                                                                                <p className="my-auto" style={{ fontSize:"14px"}}>USA</p>
-                                                                            </div>
-                                                                        </Link>
-                                                                    </button>
-                                                                    <button className="px-3 py-1 " style={{ border:"1px solid #ebebeb" , borderRadius:"18px"}}>
-                                                                        <Link to="">
-                                                                            <div className="flex gap-2">
-                                                                                <div>
-                                                                                    <i style={{ fontSize:"16px" , color:"rgba(97,255,216,0.78)"}} className="fa-solid fa-globe"></i>
-                                                                                </div>
-                                                                                <p className="my-auto" style={{ fontSize:"14px"}}>JAPAN</p>
-                                                                            </div>
-                                                                        </Link>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-
+                                                            </li>
+                                                        )
+                                                    })}
                                                 </div>
                                                 <div className="mx-6 py-7">
                                                     <button className="w-full font-medium py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Log In</button>
@@ -212,13 +215,13 @@ export const NavigationComponent = ({id}) => {
                             </div>
                             <div className="my-auto flex gap-3">
                                 <button className="btn weverse-background-btn border-radius-20 px-5 py-1.5">
-                                    <Link>
+                                    <Link to="/login">
                                         <p className="font-medium text-white" style={{ fontSize:"14px"}}>Log in</p>
                                     </Link>
                                 </button>
                                 <button className="btn border-radius-20 px-5 py-1.5" style={{ border:"1px solid #08CCCA"}}>
-                                    <Link>
-                                        <p className="font-medium weverse-color" style={{ fontSize:"14px"}}>Sign in</p>
+                                    <Link to="/signup">
+                                        <p className="font-medium weverse-color" style={{ fontSize:"14px"}}>Sign Up</p>
                                     </Link>
                                 </button>
                             </div>
