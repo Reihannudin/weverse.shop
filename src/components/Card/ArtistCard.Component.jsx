@@ -1,7 +1,11 @@
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 
 export const ArtistCardComponent = (props) => {
+
+    const params = useParams();
+    console.log(params)
+
 
     return(
         <>
@@ -17,7 +21,7 @@ export const ArtistCardComponent = (props) => {
                     <div className="align-items-center ms-4 my-auto ">
                         <h5 className="font-bold mb-2 py-0" style={{ fontSize:"20px"}}>{props.name}</h5>
                         <div className="py-0 mt-0 mb-2 flex">
-                            <Link to={`/shop/${props.id}`}   >
+                            <Link to={`/${params.lang_id}/shop/${params.currency_id}/artist/${props.id}/categories/`}   >
                                 {/*//element={<Shop artistId={} />}*/}
                                 <div className="flex me-4 gap-2" style={{borderRight: "1px solid #858888"}}>
                                     <div style={{ height:"25px" , width:"25px"}}>
@@ -26,7 +30,7 @@ export const ArtistCardComponent = (props) => {
                                     <h6 style={{marginTop: "1px" , marginRight: "8px"}}>GLOBAL</h6>
                                 </div>
                             </Link>
-                            <Link to={`/shop/${props.id}`}   >
+                            <Link to={`/${params.lang_id}/shop/${params.currency_id}/artist/${props.id}/categories/`}   >
                             <div className="flex pe-4 gap-2 " style={{borderRight: "1px solid #858888"}}>
                                 <div className="mt-1" style={{height: "20px"}}>
                                     <img src="/assets/us-flag.svg" style={{borderRadius:"100%"}}className="h-full"
@@ -35,7 +39,7 @@ export const ArtistCardComponent = (props) => {
                                     <h6 style={{marginTop: "1px"}}>USA</h6>
                             </div>
                             </Link>
-                            <Link to={`/shop/${props.id}`}   >
+                            <Link to={`/${params.lang_id}/shop/${params.currency_id}/artist/${props.id}/categories/`}   >
                             <div className="flex ms-4 pe-4 gap-2 " >
                                 <div className="mt-1" style={{height: "20px"}}>
                                     <img src="/assets/japan-flag.svg"  style={{borderRadius:"100%"}} className="h-full"

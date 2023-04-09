@@ -9,18 +9,15 @@ import {useEffect, useState} from "react";
 
 function View(){
 
-    const {id , product_id} = useParams();
-
-    console.log(id)
-    console.log(product_id)
+    const params = useParams();
 
     const [product , setProduct] = useState([])
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/shop/${id}/product/${product_id}/v`)
+        fetch(`http://127.0.0.1:8000/api/${params.lang_id}/shop/${params.currency_id}/artist/${params.artist_id}/product/v/${params.product_id}`)
             .then((response) => response.json())
             .then((product => setProduct(product)))
-    } , [id , product_id])
+    } , [])
 
     console.log(product)
     return(

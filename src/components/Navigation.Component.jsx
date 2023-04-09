@@ -175,14 +175,28 @@ export const NavigationComponent = ({id}) => {
                                                 {language.map((langitem) =>{
                                                     return(
                                                         <>
+                                                            { langitem.currency[0] ? (
                                                             <li>
                                                                 {/*<button  className="w-full" onClick={() => handleLanguageSwitch('en')}>*/}
-                                                                <a  href={`/${langitem.slug}/home`} >
+                                                                <a  href={`/${langitem.slug}/home/${langitem.currency[0].slug}`} >
                                                                     <p
                                                                         className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{langitem.language}</p>
                                                                 </a>
                                                                 {/*</button>*/}
                                                             </li>
+                                                            ) : langitem.currency[1] ? (
+                                                            <a  href={`/${langitem.slug}/home/${langitem.currency[0].slug}`} >
+                                                              <p
+                                                              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{langitem.language}</p>
+                                                            </a>
+                                                              ): langitem.currency[2] ?(
+                                                            <a  href={`/${langitem.slug}/home/${langitem.currency[0].slug}`} >
+                                                              <p
+                                                              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{langitem.language}</p>
+                                                            </a>
+                                                            ) : null
+                                                        }
+
                                                         </>
                                                     )
                                                 })}

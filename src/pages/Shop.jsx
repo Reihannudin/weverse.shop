@@ -9,17 +9,16 @@ import Home from "./Home";
 
 function Shop (){
 
-    // const [product , setProduct ] = useState([])
-    const {id } = useParams();
-
+    const params = useParams();
+    console.log(params)
 
     return(
         <>
             <NavigationComponent />
             <div className="pt-14">
-                <CategoriesComponent id={id} />
+                <CategoriesComponent artist_id={params.artist_id} language_id={params.lang_id} currency_id={params.currency_id} />
                 {/*<TypeComponent id={id}/>*/}
-                <ProductListComponent id={id}/>
+                <ProductListComponent  artist_id={params.artist_id} language_id={params.lang_id} currency_id={params.currency_id} categories_id={params.categories_id}/>
                 {/*<ProductListByCategoriesComponent id={id} />*/}
 
             </div>

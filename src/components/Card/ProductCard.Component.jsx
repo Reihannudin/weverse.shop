@@ -6,7 +6,7 @@ export const ProductCardComponent = (props) =>
 
     return (
         <>
-            <Link to={`/shop/${props.artist_id}/product/${props.product_id}/v`}>
+            <Link to={`/${props.language_id}/shop/${props.currency_id}/artist/${props.artist_id}/product/v/${props.product_id}`}>
                 <div className="w-full">
                     <div>
                         <div>

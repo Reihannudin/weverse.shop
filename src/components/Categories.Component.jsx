@@ -1,17 +1,17 @@
 import {Link} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 
-export const CategoriesComponent = ({id , categories_id}) =>{
+export const CategoriesComponent = ({ categories_id , language_id , currency_id , artist_id }) =>{
 
     const [categories, setCategories] = useState([]);
     const isUndefined = categories_id == undefined;
 
         ///'
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/shop/${id}/categories`)
+        fetch(`http://127.0.0.1:8000/api/${language_id}/shop/${currency_id}/artist/${artist_id}/categories/`)
             .then((response) => response.json())
             .then((product => setCategories(product)))
-    } , [id])
+    } , [artist_id])
 
     return(
         <>
@@ -20,14 +20,14 @@ export const CategoriesComponent = ({id , categories_id}) =>{
                     <div className="mx-4">
                         <ul className="flex pt-7 pb-0 gap-8">
                             <li>
-                                <Link to={`/shop/${id}`} >
+                                <Link to={`/${language_id}/shop/${currency_id}/artist/${artist_id}/categories/`} >
                                     <h4 className="font-bold" style={{ fontSize:"14px"}}>All</h4>
                                 </Link>
                             </li>
                             {categories.map((item) => {
                                 return(
                                     <li >
-                                        <a href={`/shop/${id}/categories/${item.id}`}>
+                                        <a href={`/${language_id}/shop/${currency_id}/artist/${artist_id}/categories/${item.id}`}>
                                             <h4 className="font-bold" style={{ fontSize:"14px"}}>{item.name}</h4>
                                         </a>
                                     </li>

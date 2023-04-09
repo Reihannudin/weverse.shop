@@ -2,15 +2,15 @@ import {ProductCardComponent} from "./Card/ProductCard.Component";
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
-export const ProductListComponent = ({id}) => {
+export const ProductListComponent = ({ language_id , currency_id , artist_id , categories_id}) => {
 
     const [product , setProduct ] = useState([])
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/shop/${id}`)
+        fetch(`http://127.0.0.1:8000/api/${language_id}/shop/${currency_id}/artist/${artist_id}/product`)
             .then((response) => response.json())
             .then((product => setProduct(product)))
-    } , [id])
+    } , [artist_id])
 
 
     return(
@@ -33,7 +33,7 @@ export const ProductListComponent = ({id}) => {
                                         return(
                                             <>
                                                 <div key={item.id} >
-                                                    <ProductCardComponent artist_id={item.artist_id} product_id={item.id} name={item.name} image={item.image} price={item.price} />
+                                                    <ProductCardComponent artist_id={item.artist_id} language_id={language_id} currency_id={currency_id} product_id={item.id} name={item.name} image={item.image} price={item.price} />
                                                 </div>
                                             </>
                                         )

@@ -8,18 +8,17 @@ import {ProductListByCategoriesComponent} from "../components/ProductListByCateg
 
 function ShopCategory (){
 
-    const {id , categories_id} = useParams();
+    const params = useParams();
+    console.log(params)
 
-    console.log(id)
-    console.log(categories_id)
 
     return(
         <>
             <NavigationComponent />
             <div className="pt-14">
-                <CategoriesComponent id={id} categories_id={categories_id} />
-                <TypeComponent id={id}/>
-                <ProductListByCategoriesComponent id={id} categories_id={categories_id}/>
+                <CategoriesComponent artist_id={params.artist_id} language_id={params.lang_id} currency_id={params.currency_id}  categories_id={params.categories_id} />
+                {/*<TypeComponent id={id}/>*/}
+                <ProductListByCategoriesComponent artist_id={params.artist_id} language_id={params.lang_id} currency_id={params.currency_id} categories_id={params.categories_id}/>
             </div>
             <FooterComponent />
         </>
