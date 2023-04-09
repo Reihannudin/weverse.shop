@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useHref, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 export const NavigationComponent = ({id}) => {
@@ -10,6 +10,16 @@ export const NavigationComponent = ({id}) => {
             .then((response) => response.json())
             .then(artist => setArtist(artist))
     } , [])
+
+    const langparam = useParams();
+    // console.log(langparam)
+    const [language , setLanguage] = useState([])
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/api/language")
+            .then((response) => response.json())
+            .then(language => setLanguage(language))
+    } , [language])
 
     return(
         <>
@@ -110,53 +120,123 @@ export const NavigationComponent = ({id}) => {
                                     </div>
                                 </div>
                                 <div className="flex gap-2 my-auto" style={{ borderLeft:"1px solid #ebebeb"}} >
-                                    <div className="ms-3 cursor-pointer  gap-2 flex ">
-                                        <button id="dropdownNavbarLink" style={{ fontSize:"14px"}}  data-dropdown-toggle="dropdown_language"
-                                                className=" cursor-pointer gap-2 flex ">
-                                            <span style={{ fontSize:"14px"}} className="font-medium text-gray-500">English</span>
-                                            <i className="fa-solid my-auto fa-chevron-down text-gray-500" style={{ fontSize:"12px"}}></i>
-                                        </button>
-                                        <div id="dropdown_language"
+                                    <div className="ms-3 cursor-pointer gap-2 flex">
+                                        {langparam.lang_id === "en" ? (
+                                            <button
+                                                id="dropdownNavbarLink"
+                                                style={{ fontSize: "14px" }}
+                                                data-dropdown-toggle="dropdown_language"
+                                                className="cursor-pointer gap-2 flex"
+                                            >
+      <span style={{ fontSize: "14px" }} className="font-medium text-gray-500">
+        English
+      </span>
+                                                <i
+                                                    className="fa-solid my-auto fa-chevron-down text-gray-500"
+                                                    style={{ fontSize: "12px" }}
+                                                ></i>
+                                            </button>
+                                        ) : langparam.lang_id === "kr" ? (
+                                            <button
+                                                id="dropdownNavbarLink"
+                                                style={{ fontSize: "14px" }}
+                                                data-dropdown-toggle="dropdown_language"
+                                                className="cursor-pointer gap-2 flex"
+                                            >
+      <span style={{ fontSize: "14px" }} className="font-medium text-gray-500">
+       한국어
+      </span>
+                                                <i
+                                                    className="fa-solid my-auto fa-chevron-down text-gray-500"
+                                                    style={{ fontSize: "12px" }}
+                                                ></i>
+                                            </button>
+                                        ) : langparam.lang_id === "jp" ? (
+                                            <button
+                                                id="dropdownNavbarLink"
+                                                style={{ fontSize: "14px" }}
+                                                data-dropdown-toggle="dropdown_language"
+                                                className="cursor-pointer gap-2 flex"
+                                            >
+      <span style={{ fontSize: "14px" }} className="font-medium text-gray-500">
+        日本語
+      </span>
+                                                <i
+                                                    className="fa-solid my-auto fa-chevron-down text-gray-500"
+                                                    style={{ fontSize: "12px" }}
+                                                ></i>
+                                            </button>
+                                        ) : null}
+
+                                    <div id="dropdown_language"
                                              className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                             <ul className="py-2 text-sm text-gray-700 dark:text-gray-400"
                                                 aria-labelledby="dropdownLargeButton">
-                                                <li>
-                                                    <a href="#"
-                                                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">English</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"
-                                                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Korean</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"
-                                                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Japanese</a>
-                                                </li>
+                                                {language.map((langitem) =>{
+                                                    return(
+                                                        <>
+                                                            <li>
+                                                                {/*<button  className="w-full" onClick={() => handleLanguageSwitch('en')}>*/}
+                                                                <a  href={`/${langitem.slug}/home`} >
+                                                                    <p
+                                                                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{langitem.language}</p>
+                                                                </a>
+                                                                {/*</button>*/}
+                                                            </li>
+                                                        </>
+                                                    )
+                                                })}
                                             </ul>
                                         </div>
                                     </div>
                                     <div className="ms-0 cursor-pointer   gap-2 flex">
-                                        <button id="dropdownNavbarLink" style={{ fontSize:"14px"}}  data-dropdown-toggle="dropdown_money"
-                                                className=" cursor-pointer gap-2 flex ">
-                                            <span style={{ fontSize:"14px"}} className="font-medium text-gray-500">$(USD) </span>
-                                            <i className="fa-solid my-auto fa-chevron-down text-gray-500" style={{ fontSize:"12px"}}></i>
-                                        </button>
+                                        {langparam.currency_id === "GL_USD" ? (
+                                            <button id="dropdownNavbarLink" style={{ fontSize:"14px"}}  data-dropdown-toggle="dropdown_money"
+                                                    className=" cursor-pointer gap-2 flex ">
+                                                <span style={{ fontSize:"14px"}} className="font-medium text-gray-500">$(USD)</span>
+                                                <i className="fa-solid my-auto fa-chevron-down text-gray-500" style={{ fontSize:"12px"}}></i>
+                                            </button>
+                                        ) : langparam.currency_id === "GL_KRW" ? (
+                                            <button id="dropdownNavbarLink" style={{ fontSize:"14px"}}  data-dropdown-toggle="dropdown_money"
+                                                    className=" cursor-pointer gap-2 flex ">
+                                                <span style={{ fontSize:"14px"}} className="font-medium text-gray-500">₩(KRW)</span>
+                                                <i className="fa-solid my-auto fa-chevron-down text-gray-500" style={{ fontSize:"12px"}}></i>
+                                            </button>
+                                        ) : langparam.currency_id === "GL_JPY" ? (
+                                            <button id="dropdownNavbarLink" style={{ fontSize:"14px"}}  data-dropdown-toggle="dropdown_money"
+                                                    className=" cursor-pointer gap-2 flex ">
+                                                <span style={{ fontSize:"14px"}} className="font-medium text-gray-500">¥(JPY)</span>
+                                                <i className="fa-solid my-auto fa-chevron-down text-gray-500" style={{ fontSize:"12px"}}></i>
+                                            </button>
+                                        ): null}
                                         <div id="dropdown_money"
                                              className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                             <ul className="py-2 text-sm text-gray-700 dark:text-gray-400"
                                                 aria-labelledby="dropdownLargeButton">
-                                                <li>
-                                                    <a href="#"
-                                                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">W(KRW) South Korean Won</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"
-                                                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">$(USD) US Dollar</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"
-                                                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Y(JPY) Japanese Yen</a>
-                                                </li>
+                                                {language.map((langitem) =>{
+                                                    // console.log(langitem.currency)
+                                                    return(
+                                                        <>
+                                                            {langitem.slug === langparam.lang_id  ? (
+                                                                <>
+                                                                    {langitem.currency.map((currencyItem) => {
+                                                                        // console.log(currencyItem)
+                                                                        return(
+                                                                            <>
+                                                                                <li>
+                                                                                    <a  href={`/${langparam.lang_id}/home/${currencyItem.slug}`}
+                                                                                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{currencyItem.currency}</a>
+                                                                                </li>
+                                                                            </>
+                                                                        )
+                                                                    })}
+                                                                </>
+                                                            ): (
+                                                                <></>
+                                                            )}
+                                                        </>
+                                                    )
+                                                })}
                                             </ul>
                                         </div>
                                     </div>

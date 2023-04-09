@@ -1,6 +1,5 @@
-import {useEffect, useState} from "react";
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
-import Shop from "../../pages/Shop";
+import {Link} from "react-router-dom";
+
 
 export const ArtistCardComponent = (props) => {
 
@@ -21,27 +20,30 @@ export const ArtistCardComponent = (props) => {
                             <Link to={`/shop/${props.id}`}   >
                                 {/*//element={<Shop artistId={} />}*/}
                                 <div className="flex me-4 gap-2" style={{borderRight: "1px solid #858888"}}>
-                                    <div >
-                                        <i className="fa-solid h-full fa-globe" style={{ fontSize:"17px"}}></i>
+                                    <div style={{ height:"25px" , width:"25px"}}>
+                                        <img className="h-full w-full"  src="/assets/global-icon.png"/>
                                     </div>
                                     <h6 style={{marginTop: "1px" , marginRight: "8px"}}>GLOBAL</h6>
                                 </div>
                             </Link>
+                            <Link to={`/shop/${props.id}`}   >
                             <div className="flex pe-4 gap-2 " style={{borderRight: "1px solid #858888"}}>
                                 <div className="mt-1" style={{height: "20px"}}>
-                                    <img src="/assets/indonesia-flag.svg" className="h-full"
+                                    <img src="/assets/us-flag.svg" style={{borderRadius:"100%"}}className="h-full"
                                          alt=""/>
                                 </div>
                                     <h6 style={{marginTop: "1px"}}>USA</h6>
                             </div>
+                            </Link>
+                            <Link to={`/shop/${props.id}`}   >
                             <div className="flex ms-4 pe-4 gap-2 " >
                                 <div className="mt-1" style={{height: "20px"}}>
-                                    <img src="/assets/indonesia-flag.svg" className="h-full"
+                                    <img src="/assets/japan-flag.svg"  style={{borderRadius:"100%"}} className="h-full"
                                          alt=""/>
                                 </div>
                                 <h6 style={{marginTop: "1px"}}>JAPAN</h6>
                             </div>
-
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -19,8 +19,6 @@ export const BannerListComponent = () => {
         document.getElementById("contentRecommended").scrollLeft += 400;
     }
 
-    console.log(banners)
-
     return(
         <>
             <section className="w-full pt-14">

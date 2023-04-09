@@ -13,7 +13,6 @@ export const ArtistListComponent = () => {
             .then((artist => setArtist(artist)));
     }, [])
 
-    console.log(artist);
 
     return(
         <>

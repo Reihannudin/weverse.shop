@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, redirect, Navigate, useParams} from "react-router-dom";
 import Home from "./pages/Home";
 import "@fortawesome/fontawesome-free/css/all.css";
 import Shop from "./pages/Shop";
@@ -16,12 +16,20 @@ import Cart from "./pages/Cart";
 import {AnnouncementsCardComponent} from "./components/Card/AnnouncementsCard.Component";
 import Announcement from "./pages/Announcement";
 import Events from "./pages/Events";
+import {useEffect, useState} from "react";
+import {NavigationComponent} from "./components/Navigation.Component";
 function App() {
 
-  return(
+    const { param } = useParams();
+    console.log(param);
+
+    return(
       <div className="App">
+          <NavigationComponent />
           <Routes>
-              <Route path="/" element={<Home />}></Route>
+              <Route path="/" element={<Navigate to='en/home' />}></Route>
+              <Route path="/:lang_id/home/" element={<Navigate to='/en/home/GL_USD' />}></Route>
+              <Route path="/:lang_id/home/:currency_id" element={<Home />} default></Route>
               <Route path="/shop/:id" element={<Shop  />}></Route>
               <Route path="/shop/:id/categories/:categories_id" element={<ShopCategory  />}></Route>
               <Route path="/shop/:id/product/:product_id/v/" element={<View />}></Route>
@@ -32,8 +40,8 @@ function App() {
               <Route path="/order/returnExchange/history" element={<Return />}></Route>
               <Route path="/support" element={<Support />}></Route>
               <Route path="/my/addresses" element={<Address />}></Route>
-              <Route path="/notice" element={<Announcement />}></Route>
-              <Route path="/events" element={<Events />}></Route>
+              <Route path="/shop/:id/notice" element={<Announcement />}></Route>
+              <Route path="/shop/:id/events" element={<Events />}></Route>
 
 
 
