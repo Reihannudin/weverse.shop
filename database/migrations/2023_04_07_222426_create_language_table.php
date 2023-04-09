@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('types', function (Blueprint $table) {
-            $table->unsignedInteger('categories_id');
+        Schema::create('language', function (Blueprint $table) {
+            $table->id();
+            $table->string('language');
+            $table->string('slug');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('types', function (Blueprint $table) {
-            $table->unsignedInteger('categories_id');
-        });
+        Schema::dropIfExists('language');
     }
 };

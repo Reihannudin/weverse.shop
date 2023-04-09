@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
@@ -20,28 +21,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 });
 
-Route::get('/banner' , [BannerController::class , 'index']); // success
-Route::get('/artist' , [ArtistController::class  , 'index']); // success
-//Route::get('/artist/{artist_id}' , [ArtistController::class , 'show']);
-
-Route::get('/shop/{artist_id} ' , [ShopController::class , 'show']); // success
-Route::get('/shop/{artist_id}/product/{product_id}/v' , [ProductController::class , 'show']);  // success
-Route::get('/shop/{artist_id}/categories' , [ShopController::class , 'categoriesByArtist']); // success
-Route::get('/shop/{artist_id}/categories/{categories_id}' , [ProductController::class , 'showByCategory']);
-Route::get('/shop/{artist_id}/type' , [ShopController::class , 'typeByArtist']); // success
-
-Route::get('/product' , [ProductController::class , 'index']); // testing
-
-
-//Route::get('/shop/{artist_id}/categories/{categories_id}/type/{type_id}' , [ProductController::class , 'showByCategoryAndType']);
-//Route::get('/shop/{artist_id}/categories/{categories_id}' , [ProductController::class , 'showByCategory']);
-//Route::get('/shop/{artist_id}/type/{type_id}' , [ProductController::class , 'showByType']);
+// auth
+//Route::get('/login' , [AuthController::class  , 'login']);
+//Route::get('/register' , [AuthController::class  , 'register']);
+//Route::get('/logout' , [AuthController::class  , 'logout']);
+//Route::get('/forgot/password' , [AuthController::class  , 'forgotPassword']);
 //
 
-//Artist
-//Route::get('/shop/{artist_id}' , [ArtistController::class , 'show']);
+
+Route::get('/banner' , [ShopController::class , 'banner']); // success
+Route::get('/language' , [ShopController::class , 'language']); // success
+Route::get('/currency' , [ShopController::class , 'currency']); // success
+Route::get('/artist' , [ArtistController::class  , 'index']);
 
 
+Route::get('/{language}/artist/{artist_id}' , [ArtistController::class , 'show']);
+//
+Route::get('/{language}/shop/{shop_currency}/artist/{artist_id}/product/' , [ShopController::class , 'show']); // success
+Route::get('/{language}/shop/{shop_currency}/artist/{artist_id}/product/v/{product_id}' , [ProductController::class , 'show']);  // success
+Route::get('/{language}/shop/{shop_currency}/artist/{artist_id}/categories' , [ShopController::class , 'categoriesByArtist']); // s
+Route::get('/{language}/shop/{shop_currency}/artist/{artist_id}/categories/{categories_id}' , [ProductController::class , 'showByCategory']);
+Route::get('/{language}/shop/{shop_currency}/artist/{artist_id}/categories/{categories_id}/sub_categories/{sub_categories_id}' , [ProductController::class , 'showBySubCategory']);

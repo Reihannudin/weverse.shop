@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pivot_artist_categories', function (Blueprint $table) {
-            $table->unsignedInteger('artist_id');
-            $table->unsignedInteger('categories_id');
+        Schema::create('product_sub_categories', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('sub_categories_id');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pivot_artist_categories');
+        Schema::dropIfExists('product_sub_categories');
     }
 };

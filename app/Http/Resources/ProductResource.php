@@ -23,14 +23,14 @@ class ProductResource extends JsonResource
             'artist' => $this->artist->name,
             'category' => [
                 $this->category,
-                'type' => $this->type,
+                'sub_category' => $this->type,
             ],
             'image' => $this->image ,
             'description_image' => $this->description_images,
             'information_id' => $this->information,
-            'type_id' => $this->type->name,
+            'sub_category_id' => $this->type->id,
             'created_at' => $this->created_at->toDateString(),
-            'updated_at' => $this->updated_at->toDateString(),
+//            'updated_at' => $this->updated_at->toDateString(),
 
         ];
     }

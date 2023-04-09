@@ -24,16 +24,11 @@ class Products extends Model
     }
 
     public function type(){
-        return $this->belongsTo(Types::class);
+        return $this->belongsTo(SubCategories::class);
     }
 
     public function description_images(){
         return $this->belongsToMany(DescImage::class , 'desc_image_products' , 'product_id' , 'desc_image_id');
     }
-
-    //    public function categories(){
-//        return $this->belongsToMany(Categories::class , 'pivot_artist_categories' , 'artist_id' ,
-//            'categories_id');
-//    }
 
 }

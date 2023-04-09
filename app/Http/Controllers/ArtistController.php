@@ -17,21 +17,15 @@ class ArtistController extends Controller
         $artist = ArtistResource::collection(
             Artists::all()
         );
-        return response()->json($artist);;
+        return response()->json($artist);
     }
 
-    public function show($artist_id){
+    public function show($language , $artist_id){
         $artist = ArtistResource::collection(
             Artists::query()->where('id' , $artist_id)->get()
         );
 
-        $categories = CategoryResource::collection(
-            Categories::query()->where('artist_id' , $artist_id)->get()
-        );
-
-        $data = compact('artist', 'categories');
-
-        return response()->json($data);
+        return response()->json($artist);
     }
 
 

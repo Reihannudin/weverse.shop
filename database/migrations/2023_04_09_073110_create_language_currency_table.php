@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->unsignedBigInteger('artist_id');
-            $table->timestamps();
+        Schema::create('language_currency', function (Blueprint $table) {
+            $table->unsignedBigInteger('language_id');
+            $table->unsignedBigInteger('currency_id');
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('language_currency');
     }
 };

@@ -18,11 +18,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->decimal('price');
-            $table->string('category');
+            $table->string('category_id');
             $table->string('image');
-            $table->text('description_image');
+            $table->text('description_image_id');
             $table->unsignedBigInteger('artist_id');
             $table->unsignedBigInteger('information_id');
+            $table->unsignedBigInteger('option_id');
             $table->unsignedBigInteger('type_id');
             $table->timestamps();
         });
