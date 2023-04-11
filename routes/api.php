@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ProductController;
@@ -21,18 +22,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+
 });
-
-// auth
-//Route::get('/login' , [AuthController::class  , 'login']);
-//Route::get('/register' , [AuthController::class  , 'register']);
-//Route::get('/logout' , [AuthController::class  , 'logout']);
-//Route::get('/forgot/password' , [AuthController::class  , 'forgotPassword']);
-//
-
 
 Route::get('/banner' , [ShopController::class , 'banner']); // success
 Route::get('/language' , [ShopController::class , 'language']); // success

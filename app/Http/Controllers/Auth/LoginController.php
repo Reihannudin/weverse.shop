@@ -11,39 +11,50 @@ use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
-    public function redirect(){
+    public function redirectWithGoogle()
+    {
         $redirect = Socialite::driver('google')->redirect();
         return $redirect;
     }
 
-    public function callback(){
-        try {
-            $user = Socialite::driver('google')->user();
-            $finduser = User::where('google_id', $user->id)->first();
+    public function callbackWithGoogle()
+    {
+        $user = Socialite::driver('google')->user();
 
-            if (!$finduser) {
-                $user = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'google_id' => $user->id,
-                    'password' => uniqid()
-                ]);
+        $finduser = User::where('google_id', $user->id)->first();
 
-                $finduser = User::find($user->id);
+        if (!$finduser) {
+            //     Auth::login($finduser);
+            // } else {
+            $user = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'google_id' => $user->id,
+                'password' => uniqid(), // you can change auto generate password here and send it via email but you need to add checking that the user need to change the password for security reasons
+            ]);
 
-                Auth::login($user);
-            }
+            $finduser = User::find($user->id);
 
-            if ($finduser){
-                $token = $user->createToken('auth_token')->plainTextToken;
-                User::query()->where('email' , $user->email)->update(['remember_token' => $token]);
-                $user_res = new UserResource($user);
-                $user_enc = json_encode($user_res);
-                return redirect(env('APP_FE_URL') . '/login/redirect?auth_token=' . $token . '&user=' . $user_enc);
-            }
+            Auth::login($user);
         }
-        catch (Exception $e) {
-            dd($e->getMessage());
+
+        // Jika berhasil login
+        if($finduser){
+//            $user = User::query()->where('email', $user->email)->get();
+//            $token = $user->createToken('Access Token')->accessToken;
+//            $user->query()->update(['remember_token' => $token]);
+
+            $user = auth()->user();
+            $token = $user->createToken('token-name')->plainTextToken;
+//            $token = $user->createToken('email')->plainTextToken;
+
+            User::query()->where('email', $user->email)->update(['remember_token' => $token]);
+
+            $user_res = new UserResource($user);
+
+            $user_enc = json_encode($user_res);
+
+            return redirect(env('APP_FE_URL') . '/login/redirect?auth_token=' . $token . '&user=' . $user_enc);
         }
     }
 }

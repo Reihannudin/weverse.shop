@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -20,11 +22,15 @@ Route::get('/', function () {
 });
 
 /* Google Social Login */
-//Route::domain(env('AUTH_DOMAIN'))->group(function () {
-    Route::get('/login/google', [LoginController::class, 'redirect'])->name('login.google-redirect');
-    Route::get('/login/google/callback', [LoginController::class, 'callback'])->name('login.google-callback');
+    Route::get('/login', [LoginController::class, 'redirectWithGoogle'])->name('login.google-redirect');
+    Route::get('/login/callback', [LoginController::class, 'callbackWithGoogle'])->name('login.google-callback');
 //)})
 
 Route::get('/login/{provider}', function ($provider) {
     return Socialite::driver('goggle')->redirect();
 });
+
+//Route::post('/logout' , [LogoutController::class, 'logout']);
+
+
+
