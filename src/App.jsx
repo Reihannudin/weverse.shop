@@ -18,8 +18,8 @@ import Announcement from "./pages/Announcement";
 import Events from "./pages/Events";
 import {useEffect, useState} from "react";
 import {NavigationComponent} from "./components/Navigation.Component";
-function App() {
 
+function App() {
 
     return(
       <div className="App">
@@ -27,11 +27,12 @@ function App() {
               <Routes>
                   <Route path="/" element={<Navigate to='en/home' />}></Route>
                   <Route path="/:lang_id/home/" element={<Navigate to='/en/home/GL_USD' />}></Route>
-                  <Route path="/:lang_id/home/:currency_id" element={<Home />} default></Route>
+                  <Route path="/:lang_id/home/:currency_id" element={<Home  />} default></Route>
                   <Route path="/:lang_id/shop/:currency_id/artist/:artist_id/categories" element={<Shop  />}></Route>
                   <Route path="/:lang_id/shop/:currency_id/artist/:artist_id/categories/:categories_id" element={<ShopCategory  />}></Route>
                   <Route path="/:lang_id/shop/:currency_id/artist/:artist_id/product/v/:product_id" element={<View />}></Route>
                   <Route path="/login" element={<Login />}/>
+                  <Route path="/login/redirect" element={<Login />} />
                   <Route path="/signup" element={<SignUp />}/>
                   <Route path="/cart" element={<Cart />}></Route>
                   <Route path="/order/history" element={<Order />}></Route>
@@ -40,14 +41,7 @@ function App() {
                   <Route path="/my/addresses" element={<Address />}></Route>
                   <Route path="/shop/:id/notice" element={<Announcement />}></Route>
                   <Route path="/shop/:id/events" element={<Events />}></Route>
-
-
-
                   <Route path="/testing" element={<TabsRender />}></Route>
-
-                  {/*<Route path="/shop/:id/categories/:id/type/:id" element={<Shop  />}></Route>*/}
-                  {/*<Route path="/shop/:id/type/:id" element={<Shop  />}></Route>*/}
-
               </Routes>
           </div>
       </div>
@@ -55,3 +49,19 @@ function App() {
 }
 
 export default App;
+//
+// const [logged, setLogged] = useState(false);
+//
+// //define the variable local storage
+// useEffect( () => {
+//     const storeDataLogged = localStorage.getItem("isLogin");
+//     if (storeDataLogged !== null){
+//         setLogged(JSON.parse(storeDataLogged));
+//     }
+// } , []);
+//
+// useEffect(() => {
+//     localStorage.setItem('isLogin' , JSON.stringify(logged))
+// }, [logged]);
+//
+// console.log(logged)

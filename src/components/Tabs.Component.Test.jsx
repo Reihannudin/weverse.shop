@@ -1,45 +1,23 @@
 import React, { useState } from 'react';
-import {useParams} from "react-router-dom";
 
-function TabsLayout({ tabs }) {
-    const [activeTab, setActiveTab] = useState(tabs[0].id);
+// Declare the constant variable outside the component scope
+const initialData = {name: "John", age: 25};
 
-    const handleClick = (tabId) => {
-        setActiveTab(tabId);
+function TabsRender(){
+    // Use useState to initialize the state variable
+    const [data, setData] = useState(initialData);
+
+    // Update the state variable
+    const handleUpdate = () => {
+        setData({...data, age: 30});
     }
 
     return (
         <div>
-            <ul>
-                {tabs.map(tab => (
-                    <li key={tab.id} className={activeTab === tab.id ? 'active' : ''} onClick={() => handleClick(tab.id)}>
-                        {tab.label}
-                    </li>
-                ))}
-            </ul>
-            <div>
-                {tabs.map(tab => (
-                    <div key={tab.id} className={activeTab === tab.id ? 'active' : 'hidden'}>
-                        {tab.content}
-                    </div>
-                ))}
-            </div>
+            <p>Name: {data.name}</p>
+            <p>Age: {data.age}</p>
+            <button onClick={handleUpdate}>Update Age</button>
         </div>
-    );
-}
-
-function TabsRender(){
-
-    const {id } = useParams();
-
-    const tabs = [
-        { id: 1, label: 'Tab 1', content: 'Content 1' },
-        { id: 2, label: 'Tab 2', content: 'Content 2' },
-        { id: 3, label: 'Tab 3', content: 'Content 3' },
-    ];
-
-    return (
-        <TabsLayout tabs={tabs} />
     );
 }
 

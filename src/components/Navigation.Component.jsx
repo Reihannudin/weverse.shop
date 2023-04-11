@@ -1,9 +1,15 @@
 import {Link, useHref, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
-export const NavigationComponent = ({id}) => {
+
+export const NavigationComponent = () => {
 
     const [artist , setArtist] = useState([])
+    const navigate = useNavigate();
+    const urlParams = new URLSearchParams(window.location.search);
+    const auth_token = urlParams.get("auth_token");
+    const setuser = urlParams.get("user");
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/artist")
@@ -20,6 +26,30 @@ export const NavigationComponent = ({id}) => {
             .then((response) => response.json())
             .then(language => setLanguage(language))
     } , [language])
+
+    // const handleLogout = () => {
+    //     fetch('http://127.0.0.1:8000/logout', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+    //         }
+    //     })
+    //         .then(response => {
+    //             if (response){
+    //                 localStorage.setItem('isLogin' , false)
+    //                 localStorage.setItem("token", auth_token);
+    //                 localStorage.setItem("whoLogin", setuser);
+    //                 navigate("/");
+    //             }
+    //         })
+    //         .catch(error => {
+    //             // handle error
+    //         });
+    // }
+
+    const user = JSON.parse(localStorage.getItem('whoLogin'));
+    const logged = JSON.parse(localStorage.getItem('isLogin'));
 
     return(
         <>
@@ -301,24 +331,47 @@ export const NavigationComponent = ({id}) => {
                                         </Link>
                                     </li>
                                     <li className="pe-2" >
-                                        <Link to="">
+                                        <Link to="/support">
                                             <p>Support</p>
                                         </Link>
                                     </li>
                                 </ul>
                             </div>
-                            <div className="my-auto flex gap-3">
-                                <button className="btn weverse-background-btn border-radius-20 px-5 py-1.5">
-                                    <Link to="/login">
-                                        <p className="font-medium text-white" style={{ fontSize:"14px"}}>Log in</p>
-                                    </Link>
-                                </button>
-                                <button className="btn border-radius-20 px-5 py-1.5" style={{ border:"1px solid #08CCCA"}}>
-                                    <Link to="/signup">
-                                        <p className="font-medium weverse-color" style={{ fontSize:"14px"}}>Sign Up</p>
-                                    </Link>
-                                </button>
-                            </div>
+                            {logged ? (
+                                <div className="my-auto flex gap-3">
+                                    <li className="ps-3 list-none" style={{ borderLeft:"1px solid #ebebeb"}}>
+                                        <button id="dropdownNavbarLink" style={{ fontSize:"14px"}}  data-dropdown-toggle="dropdown_profile"
+                                                className=" cursor-pointer gap-2 flex ">
+                                            <span style={{ fontSize:"14px"}} className="font-medium text-gray-500">{user.name}</span>
+                                            <i className="fa-solid my-auto fa-chevron-down text-gray-500" style={{ fontSize:"12px"}}></i>
+                                        </button>
+                                        <div id="dropdown_profile"
+                                             className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                            <ul className="py-2 text-sm text-left text-gray-700 dark:text-gray-400"
+                                                aria-labelledby="dropdownLargeButton">
+                                                <li>
+                                                    <button className="w-full text-left" >
+                                                        <p className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Log Out</p>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </div>
+                            ):(
+                                <div className="my-auto flex gap-3">
+                                    <button className="btn weverse-background-btn border-radius-20 px-5 py-1.5">
+                                        <Link to="/login">
+                                            <p className="font-medium text-white" style={{ fontSize:"14px"}}>Log in</p>
+                                        </Link>
+                                    </button>
+                                    <button className="btn border-radius-20 px-5 py-1.5" style={{ border:"1px solid #08CCCA"}}>
+                                        <Link to="/signup">
+                                            <p className="font-medium weverse-color" style={{ fontSize:"14px"}}>Sign Up</p>
+                                        </Link>
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
             </nav>
