@@ -4,18 +4,26 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class LogoutController extends Controller
 {
     public function logout (){
 
-        $token = auth('sanctum')->user()->getRememberToken()->delete();
-        $user = "undefined";
+        $user = Auth::user();
+        User::query()->where('id' ,'=' , $user->id)->update([
+            'remember_token' => null,
+        ]);
 
-        auth()->guard('web')->logout();
+        $token = User::query()->where('id', $user->id)->value('remember_token');
+//        $tokenStr = $token->toString();
+        $tokenStr = $token === null ? 'null' : null;
 
-        return redirect(env('APP_FE_URL') . '/?auth_token=' . $token . '&user=' . $user);
+            $login = "false";
+
+            return redirect(env('APP_FE_URL') . '/logout?auth_token=' . $tokenStr . '&isLogin=' . $login  . '&whoLogin=' . $tokenStr);
+
 
     }
 }

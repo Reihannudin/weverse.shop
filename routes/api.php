@@ -27,7 +27,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         return $request->user();
     });
 
+});
 
+Route::get('/logout', function () {
+    return "logout";
 });
 
 Route::get('/banner' , [ShopController::class , 'banner']); // success

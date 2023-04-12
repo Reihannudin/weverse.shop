@@ -30,7 +30,7 @@ Route::get('/login/{provider}', function ($provider) {
     return Socialite::driver('goggle')->redirect();
 });
 
-//Route::post('/logout' , [LogoutController::class, 'logout']);
+Route::get('/logout' , [LogoutController::class, 'logout']);
 
 
 
