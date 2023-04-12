@@ -1,6 +1,9 @@
 import {Link, useHref, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import api from "../config/api";
+import http from "../config/http";
+
 
 
 export const NavigationComponent = () => {
@@ -9,7 +12,7 @@ export const NavigationComponent = () => {
     const navigate = useNavigate();
     const urlParams = new URLSearchParams(window.location.search);
     const auth_token = urlParams.get("auth_token");
-    const setuser = urlParams.get("user");
+    const isLogin = urlParams.get("isLogin");
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/artist")
@@ -27,26 +30,30 @@ export const NavigationComponent = () => {
             .then(language => setLanguage(language))
     } , [language])
 
-    // const handleLogout = () => {
-    //     fetch('http://127.0.0.1:8000/logout', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-    //         }
-    //     })
-    //         .then(response => {
-    //             if (response){
-    //                 localStorage.setItem('isLogin' , false)
-    //                 localStorage.setItem("token", auth_token);
-    //                 localStorage.setItem("whoLogin", setuser);
-    //                 navigate("/");
-    //             }
-    //         })
-    //         .catch(error => {
-    //             // handle error
-    //         });
-    // }
+    useEffect(() => {
+        if (auth_token) {
+            http
+                .get("/logout", {
+                    method: 'POST',
+                    headers: {
+                        Authorization: "Bearer " + auth_token,
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                    },
+                })
+                .then((res) => {
+                    if (res) {
+                        localStorage.setItem('isLogin' , true)
+                        localStorage.setItem("token", auth_token);
+                        localStorage.setItem("whoLogin", user);
+                        navigate("/");
+                    } else {
+                        alert("Something wrong!");
+                    }
+                });
+        }
+    }, []);
+
 
     const user = JSON.parse(localStorage.getItem('whoLogin'));
     const logged = JSON.parse(localStorage.getItem('isLogin'));
@@ -350,9 +357,7 @@ export const NavigationComponent = () => {
                                             <ul className="py-2 text-sm text-left text-gray-700 dark:text-gray-400"
                                                 aria-labelledby="dropdownLargeButton">
                                                 <li>
-                                                    <button className="w-full text-left" >
-                                                        <p className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Log Out</p>
-                                                    </button>
+                                                        <a href="http://127.0.0.1:8000/logout" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Log Out</a>
                                                 </li>
                                             </ul>
                                         </div>
