@@ -20,6 +20,8 @@ import {useEffect, useState} from "react";
 import {NavigationComponent} from "./components/Navigation.Component";
 import Logout from "./pages/Logout";
 import AddPassword from "./pages/AddPassword";
+import AddInformation from "./pages/AddInformation";
+import AddPasswordSignUp from "./pages/AddPasswordSignUp";
 
 function App() {
 
@@ -34,10 +36,12 @@ function App() {
                   <Route path="/:lang_id/shop/:currency_id/artist/:artist_id/categories/:categories_id" element={<ShopCategory  />}></Route>
                   <Route path="/:lang_id/shop/:currency_id/artist/:artist_id/product/v/:product_id" element={<View />}></Route>
                   <Route path="/login" element={<Login />}/>
+                  <Route path="/signup" element={<SignUp />}/>
                   <Route path="/auth/add/password" element={<AddPassword />}/>
+                  <Route path="/signup/add/password" element={<AddPasswordSignUp />}/>
+                  <Route path="/signup/add/information/:email" element={<AddInformation />} />
                   <Route path="/logout" element={<Logout />}/>
                   <Route path="/login/redirect" element={<Login />} />
-                  <Route path="/signup" element={<SignUp />}/>
                   <Route path="/cart" element={<Cart />}></Route>
                   <Route path="/order/history" element={<Order />}></Route>
                   <Route path="/order/returnExchange/history" element={<Return />}></Route>
@@ -53,19 +57,3 @@ function App() {
 }
 
 export default App;
-//
-// const [logged, setLogged] = useState(false);
-//
-// //define the variable local storage
-// useEffect( () => {
-//     const storeDataLogged = localStorage.getItem("isLogin");
-//     if (storeDataLogged !== null){
-//         setLogged(JSON.parse(storeDataLogged));
-//     }
-// } , []);
-//
-// useEffect(() => {
-//     localStorage.setItem('isLogin' , JSON.stringify(logged))
-// }, [logged]);
-//
-// console.log(logged)
