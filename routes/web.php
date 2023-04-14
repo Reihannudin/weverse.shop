@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\PasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -22,11 +23,14 @@ Route::get('/', function () {
 });
 
 /* Google Social Login */
-    Route::get('/login', [LoginController::class, 'redirectWithGoogle'])->name('login.google-redirect');
+    Route::get('/login/form', [LoginController::class, 'login'])->name('login.form'); ///login/form?email={email}&password={password}
+    Route::get('/login/p', [LoginController::class, 'redirectWithGoogle'])->name('login.google-redirect');
     Route::get('/login/callback', [LoginController::class, 'callbackWithGoogle'])->name('login.google-callback');
+
+    Route::get('/auth/add/password/{email}' , [PasswordController::class , 'savePassword'])->name('auth.add.password');
 //)})
 
-Route::get('/login/{provider}', function ($provider) {
+Route::get('/login/p/{provider}', function ($provider) {
     return Socialite::driver('goggle')->redirect();
 });
 
