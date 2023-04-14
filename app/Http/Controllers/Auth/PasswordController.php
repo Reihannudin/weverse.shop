@@ -42,4 +42,19 @@ class PasswordController extends Controller
 
     }
 
+    public function saveSignPassword(Request $request , $email){
+        $userEmail = User::query()->where('email' , $email)->first();
+
+        if (is_null($userEmail)){
+            $error = "password cannot blank";
+            return redirect(env('APP_FE_URL') . '/signup/add/password?error=' . $error . '&email=' . $email);
+        } else{
+            $password = $request->query('password');
+
+            $userEmail->update([
+                'passwords' => $password,
+            ]);
+            return redirect(env('APP_FE_URL') . '/signup/add/information/' . $email . '?email=' . $email);
+        }
+    }
 }
