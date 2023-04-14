@@ -54,6 +54,53 @@ export const NavigationComponent = () => {
         }
     }, []);
 
+    const popUpArtist = () => {
+         const popUp = document.getElementById('pop_up_artist');
+        if(popUp.style.display === 'none'){
+            popUp.style.display = 'block'
+            console.log("berhasi dom")
+        } else if (popUp.style.display === 'block'){
+            popUp.style.display = 'none'
+            console.log("berhasi dom")
+        }
+    }
+
+    const popUpLanguage = () => {
+        const popUp = document.getElementById('pop_up_language')
+        if(popUp.style.display === 'none'){
+            popUp.style.display = 'block'
+        } else if (popUp.style.display === 'block'){
+            popUp.style.display = 'none'
+        }
+    }
+
+    const popUpCurrency = () => {
+        const popUp = document.getElementById('pop_up_currency')
+        if(popUp.style.display === 'none'){
+            popUp.style.display = 'block'
+        } else if (popUp.style.display === 'block'){
+            popUp.style.display = 'none'
+        }
+    }
+
+    const popUpOrder = () => {
+        const popUp = document.getElementById('pop_up_order')
+        if(popUp.style.display === 'none'){
+            popUp.style.display = 'flex'
+        } else if (popUp.style.display === 'flex'){
+            popUp.style.display = 'none'
+        }
+    }
+
+    const popUpProfile = () => {
+        const popUp = document.getElementById('pop_up_profile')
+        if(popUp.style.display === 'none'){
+            popUp.style.display = 'block'
+        } else if (popUp.style.display === 'block'){
+            popUp.style.display = 'none'
+        }
+    }
+
 
     const user = JSON.parse(localStorage.getItem('whoLogin'));
     const logged = JSON.parse(localStorage.getItem('isLogin'));
@@ -77,19 +124,19 @@ export const NavigationComponent = () => {
                                     {/*    <span style={{ fontSize:"14px"}} className="font-medium text-gray-500">Select Artist</span>*/}
                                     {/*    <i className="fa-solid my-auto fa-chevron-down text-gray-500" style={{ fontSize:"12px"}}></i>*/}
                                     {/*</div>*/}
-                                    <button id="dropdownNavbarLink" data-modal-target="defaultModal" data-modal-toggle="defaultModal"  style={{ fontSize:"14px"}}  data-dropdown-toggle="dropdownNavbar"
+                                    <button id="btn_pop_up_artist" onClick={popUpArtist}  style={{ fontSize:"14px"}}
                                             className="ms-3 cursor-pointer gap-2 flex ">
                                             <span style={{ fontSize:"14px"}} className="font-medium text-gray-500">Select Artist</span>
                                             <i className="fa-solid my-auto fa-chevron-down text-gray-500" style={{ fontSize:"12px"}}></i>
                                      </button>
-                                    <div id="defaultModal" tabIndex="-1" aria-hidden="true" style={{ background:"rgba(75,75,75,0.67)" }} className="fixed z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+                                    <div id="pop_up_artist" tabIndex="-1" onclose={popUpArtist}  style={{ display:"none" , background:"rgba(75,75,75,0.67)" }} className="fixed z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
                                         <div className="absolute w-6/12 mx-auto h-full max-w-2xl md:h-auto" style={{ left:"33%"}}>
-                                            <div className="relative bg-white w-8/12 rounded-lg shadow dark:bg-gray-700" style={{ height:"500px"}} >
+                                            <div className="relative bg-white w-8/12 top-16 rounded-lg shadow dark:bg-gray-700" style={{ height:"500px"}} >
                                                 <div className="flex items-start justify-end py-7 px-4 border-b rounded-t dark:border-gray-600">
                                                     <h3 className="text-xl font-bold w-full ms-5 font-semibold text-center text-gray-900 dark:text-white">
                                                         Select Shop
                                                     </h3>
-                                                    <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                                                    <button type="button"  onClick={popUpArtist} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
                                                         <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                                         <span className="sr-only">Close modal</span>
                                                     </button>
