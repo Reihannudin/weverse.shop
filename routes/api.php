@@ -4,6 +4,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TypeController;
@@ -27,17 +28,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         return $request->user();
     });
 
+
 });
 
 Route::get('/logout', function () {
     return "logout";
 });
 
+Route::get('/cart/{user_id}' , [CartController::class , 'cart']);
+Route::get('/add/{product_id}/to/cart/{user_id}' , [CartController::class , 'addToCart']);
+Route::get('/cart/information/{user_id}' , [CartController::class , 'cartInformation']);
+
+
 Route::get('/banner' , [ShopController::class , 'banner']); // success
 Route::get('/language' , [ShopController::class , 'language']); // success
 Route::get('/currency' , [ShopController::class , 'currency']); // success
 Route::get('/artist' , [ArtistController::class  , 'index']);
-
 
 Route::get('/{language}/artist/{artist_id}' , [ArtistController::class , 'show']);
 //
