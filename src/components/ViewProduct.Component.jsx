@@ -1,5 +1,16 @@
+import {useState} from "react";
 
 export const ViewProductComponent = (props) =>{
+
+    let [quantity , setQuantity] = useState(1);
+
+    const incrementQuantity = () => {
+        setQuantity(quantity++)
+    }
+
+    const decrementQuantity = () => {
+        setQuantity(quantity--)
+    }
     return(
         <>
             <div className="w-full pb-10 mb-10" >
@@ -46,12 +57,12 @@ export const ViewProductComponent = (props) =>{
                                                 <p className="mt-3.5 mb-2"  style={{ color:"#383838"}}>{props.name}</p>
                                                 <div className="flex mb-4 justify-between">
                                                     <div>
-                                                        <button disabled className="px-2" style={{ border:"1px solid #BEBEBE", color:"#ababab",borderRadius:"4px",fontSize:"16px"}}>-</button>
-                                                        <input className="w-2/12 text-center" type="text" value="0"/>
-                                                        <button className="px-1" style={{ border:"1px solid #BEBEBE", color:"#ababab", borderRadius:"4px",fontSize:"16px"}}>+</button>
+                                                        <button className="px-2" onClick={decrementQuantity} style={{ border:"1px solid #BEBEBE", color:"#ababab",borderRadius:"4px",fontSize:"16px"}}>-</button>
+                                                        <input className="w-2/12 text-center" id="quantity" type="text"  value={quantity}/>
+                                                        <button className="px-2" onClick={incrementQuantity} style={{ border:"1px solid #BEBEBE", color:"#ababab", borderRadius:"4px",fontSize:"16px"}}>+</button>
                                                     </div>
                                                     <div>
-                                                        <p>$10.21</p>
+                                                        <p>${props.price}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -63,8 +74,8 @@ export const ViewProductComponent = (props) =>{
                                             </div>
                                             <div className="my-4">
                                                 <div className="flex justify-between">
-                                                    <p>Total (1 item)</p>
-                                                    <p className="font-bold">${props.price}</p>
+                                                    <p>Total ({quantity} item)</p>
+                                                    <p className="font-bold">${quantity * props.price}</p>
                                                 </div>
                                             </div>
                                             <div className="flex mx-auto gap-4">

@@ -116,14 +116,6 @@ export const NavigationComponent = () => {
                             </div>
                             <div className="flex gap-3">
                                 <div className="my-auto">
-                                    {/*<div className="flex my-auto gap-2">*/}
-                                    {/*    <i className="fa-solid my-auto weverse-color fa-globe" style={{ fontSize:"18px"}}></i>*/}
-                                    {/*    <i className="fa-solid my-auto fa-chevron-down text-gray-500" style={{ fontSize:"12px"}}></i>*/}
-                                    {/*</div>*/}
-                                    {/*<div className="ms-3 cursor-pointer gap-2 flex ">*/}
-                                    {/*    <span style={{ fontSize:"14px"}} className="font-medium text-gray-500">Select Artist</span>*/}
-                                    {/*    <i className="fa-solid my-auto fa-chevron-down text-gray-500" style={{ fontSize:"12px"}}></i>*/}
-                                    {/*</div>*/}
                                     <button id="btn_pop_up_artist" onClick={popUpArtist}  style={{ fontSize:"14px"}}
                                             className="ms-3 cursor-pointer gap-2 flex ">
                                             <span style={{ fontSize:"14px"}} className="font-medium text-gray-500">Select Artist</span>
@@ -345,7 +337,7 @@ export const NavigationComponent = () => {
                             <div  style={{ fontSize:"14px"}} className="font-medium my-auto text-gray-500">
                                 <ul className="list-none gap-2  flex my-auto">
                                     <li className="pe-2" style={{ borderRight:"1px solid #ebebeb"}}>
-                                        <Link to="">
+                                        <Link to="http://localhost:3000/cart">
                                             <p>Cart</p>
                                         </Link>
                                     </li>
