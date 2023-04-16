@@ -52,43 +52,42 @@ class CartController extends Controller
     }
 
     public function cartIncrement($rows_id){
-        $cart = Cart::query()->where('id' , $rows_id);
-        $cart->update([
-           'quantity' => $cart->quantity +1
+        $cart = Cart::query()->where('id' , $rows_id)->get();
+        Cart::query()->where('id' , $rows_id )->update([
+           'quantity' => $cart[0]->quantity +1
         ]);
         return response()->json('Increment');
     }
 
     public function cartDecrement($rows_id){
-        $cart = Cart::query()->where('id' , $rows_id);
-        $cart->update([
-            'quantity' => $cart->quantity -1
+        $cart = Cart::query()->where('id' , $rows_id)->get();
+        Cart::query()->where('id' , $rows_id )->update([
+            'quantity' => $cart[0]->quantity - 1
         ]);
-        return response()->json('Increment');
+        return response()->json('Decrement');
     }
 
-    public function cartInformation($user_id)
+    public function cartTotalItem($user_id)
     {
 
         $cartQty = Cart::query()->select('quantity')->where('user_id' , $user_id)->get();
         $cartQtyCount = $cartQty->count();
-        $cartQtyJson = response()->json($cartQtyCount);
+        return response()->json($cartQtyCount);
 
-        $cartTotal  = CartResource::collection(
-            Cart::query()->where('user_id' ,$user_id)->get()
-        );
-        $cartTotalJson = response()->json($cartTotal);
-
-        return ["total" => $cartTotalJson, "quantity" => $cartQtyJson];
-//
-//        $carts = Cart::content();
-//        $cartQty = Cart::count();
-//
-//        return response()->json(array(
-//            'carts' => $carts,
-//            'cartQty' => $cartQty,
-//            'cartTotal' => $cartTotal
-//
-//        ));
     }
+
+    public function cartTotalPrice($user_id){
+
+        $cartItems = Cart::query()->where('user_id' , $user_id)->get();
+
+        $totalPrice = 0;
+        foreach ($cartItems as $item){
+            $product = Products::query()->find($item->product_id);
+            $totalPrice += $product->price * $item->quantity;
+        }
+
+        return response()->json($totalPrice);
+
+    }
+
 }
