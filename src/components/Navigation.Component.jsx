@@ -360,7 +360,7 @@ export const NavigationComponent = () => {
                                                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Return and Exchanges</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#"
+                                                    <a href="/my/addresses"
                                                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Manage Address</a>
                                                 </li>
                                             </ul>
