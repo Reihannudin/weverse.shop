@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,7 @@ Route::get('/logout', function () {
     return "logout";
 });
 
+//cart
 Route::get('/cart/{user_id}' , [CartController::class , 'cart']);
 Route::get('/add/{product_id}/to/cart/{user_id}' , [CartController::class , 'addToCart']);
 Route::get('/cart/total/item/{user_id}' , [CartController::class , 'cartTotalItem']);
@@ -43,6 +45,11 @@ Route::get('/cart/remove/{rows_id}' , [CartController::class , 'cartRemove']);
 Route::get('/cart/int/{rows_id}' , [CartController::class , 'cartIncrement']);
 Route::get('/cart/dec/{rows_id}' , [CartController::class , 'cartDecrement']);
 
+//address
+Route::get('/my/address/{user_id}' , [UserController::class , 'address']);
+Route::get('/my/address/new/{user_id}' , [UserController::class , 'addAddress']);
+Route::get('/my/address/edit/{rows_id}' , [UserController::class , 'editAddress']);
+Route::get('/my/address/remove/{rows_id}' , [UserController::class , 'removeAddress']);
 
 Route::get('/banner' , [ShopController::class , 'banner']); // success
 Route::get('/language' , [ShopController::class , 'language']); // success

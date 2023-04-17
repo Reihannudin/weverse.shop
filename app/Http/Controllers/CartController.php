@@ -40,15 +40,14 @@ class CartController extends Controller
 
             $message = "You successfully add product on your cart";
 
-            return redirect(env('APP_FE_URL'))-> response()->json(['success' => 'Successfully Added on Your Cart' ]);
-
+            return back();
         }
 
     }
 
     public function cartRemove($rows_id){
         Cart::query()->where('id' , $rows_id)->delete();
-        return response()->json(['success' => 'Successfully Remove From Cart']);
+        return redirect(env('APP_FE_URL') . '/cart');
     }
 
     public function cartIncrement($rows_id){
@@ -56,7 +55,8 @@ class CartController extends Controller
         Cart::query()->where('id' , $rows_id )->update([
            'quantity' => $cart[0]->quantity +1
         ]);
-        return response()->json('Increment');
+
+        return redirect(env('APP_FE_URL') . '/cart');
     }
 
     public function cartDecrement($rows_id){
@@ -64,7 +64,8 @@ class CartController extends Controller
         Cart::query()->where('id' , $rows_id )->update([
             'quantity' => $cart[0]->quantity - 1
         ]);
-        return response()->json('Decrement');
+        return redirect(env('APP_FE_URL') . '/cart');
+
     }
 
     public function cartTotalItem($user_id)
@@ -86,7 +87,10 @@ class CartController extends Controller
             $totalPrice += $product->price * $item->quantity;
         }
 
-        return response()->json($totalPrice);
+        $formatted_total = number_format($totalPrice, 2, '.', '');
+
+
+        return response()->json($formatted_total);
 
     }
 
