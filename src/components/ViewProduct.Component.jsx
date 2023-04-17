@@ -5,13 +5,28 @@ export const ViewProductComponent = (props) =>{
     let [quantity , setQuantity] = useState(1);
 
     const incrementQuantity = () => {
-        setQuantity(quantity++)
+        if (quantity >= props.max_buy) {
+            const btn = document.getElementById('btn_inc');
+            btn.style.cursor = "not-allowed";
+        } else if (quantity < props.max_buy){
+            const btn = document.getElementById('btn_inc');
+            btn.style.cursor = "pointer";
+            setQuantity(quantity + 1);
+        }
     }
 
     const decrementQuantity = () => {
-        setQuantity(quantity--)
+        if (quantity <= 1) {
+            const btn = document.getElementById('btn_dec');
+            btn.style.cursor = "not-allowed";
+        } else {
+            const btn = document.getElementById('btn_dec');
+            btn.style.cursor = "pointer";
+            setQuantity(quantity - 1);
+        }
     }
 
+    let total = quantity * props.price;
     const user = JSON.parse(localStorage.getItem('whoLogin'));
 
     return(
@@ -27,7 +42,7 @@ export const ViewProductComponent = (props) =>{
                                         <div>
                                             <div className="flex gap-1" style={{ color:"#37D089"}}>
                                                 <i className="fa-solid my-auto fa-check-circle" style={{ fontSize:"13px"}}></i>
-                                                <p className="my-auto" style={{ fontSize:"13px"}}>EXCLUSIVE</p>
+                                                <p className="my-auto" style={{ fontSize:"13px"}}>{props.status}</p>
                                             </div>
                                             <div className="block gap-7">
                                                 <h2 className="pt-2"  style={{ fontSize:"28px"}}>{props.name}</h2>
@@ -39,13 +54,22 @@ export const ViewProductComponent = (props) =>{
                                                     <div className="">
                                                         <i className="fa-solid fa-clock" style={{ fontSize:"14px" , color:"#05C46B"}}></i>
                                                     </div>
-                                                    <div  className="font-medium">
-                                                        <p>For pre-order</p>
-                                                        <div className="flex justify-between">
-                                                            <p style={{ color:"#05C46B" , fontSize:"15px"}}>Scheduled Shipping Start Date</p>
-                                                            <p className="mx-4" style={{ fontSize:"14x"}}>06/13/2023 ~ 06/20/2023</p>
+                                                    {props.shipment_status === 'PREORDER' ? (
+                                                        <div  className="font-medium">
+                                                            <p>For pre-order</p>
+                                                            <div className="flex justify-between">
+                                                                <p style={{ color:"#05C46B" , fontSize:"15px"}}>Scheduled Shipping Start Date</p>
+                                                                <p className="mx-4" style={{ fontSize:"14x"}}>{props.shipment_estimate}</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    ) : (
+                                                        <div  className="font-medium">
+                                                            <div className="flex justify-between">
+                                                                    <p style={{ color:"#05C46B" , fontSize:"15px"}}>Scheduled Shipping Start Date</p>
+                                                                    <p className="mx-4" style={{ fontSize:"14x"}}>{props.shipment_estimate}</p>
+                                                            </div>
+                                                        </div>
+                                                    )}
                                                 </div>
                                                 <div className="flex px-4 my-3 py-2" style={{ color:"#ADB7CE" , background:"#FAFBFC"}}>
                                                     <div>
@@ -60,9 +84,9 @@ export const ViewProductComponent = (props) =>{
                                                 <p className="mt-3.5 mb-2"  style={{ color:"#383838"}}>{props.name}</p>
                                                 <div className="flex mb-4 justify-between">
                                                     <div>
-                                                        <button className="px-2" onClick={decrementQuantity} style={{ border:"1px solid #BEBEBE", color:"#ababab",borderRadius:"4px",fontSize:"16px"}}>-</button>
+                                                        <button className="px-2" id="btn_dec" onClick={decrementQuantity} style={{ border:"1px solid #BEBEBE", color:"#ababab",borderRadius:"4px",fontSize:"16px" , cursor:"pointer"}}>-</button>
                                                         <input className="w-2/12 text-center" id="quantity" type="text"  value={quantity}/>
-                                                        <button className="px-2" onClick={incrementQuantity} style={{ border:"1px solid #BEBEBE", color:"#ababab", borderRadius:"4px",fontSize:"16px"}}>+</button>
+                                                        <button className="px-2" id="btn_inc" onClick={incrementQuantity} style={{ border:"1px solid #BEBEBE", color:"#ababab", borderRadius:"4px",fontSize:"16px" , cursor:"pointer"}}>+</button>
                                                     </div>
                                                     <div>
                                                         <p>${props.price}</p>
@@ -72,17 +96,17 @@ export const ViewProductComponent = (props) =>{
                                             <div style={{ borderTop:"1px solid #ebebeb"}}>
                                                 <div className="flex px-4 my-0 py-1" style={{ color:"#ADB7CE" , background:"#FAFBFC"}}>
                                                     <i></i>
-                                                    <p>You can order up to 5 items.</p>
+                                                    <p>You can order up to {props.max_buy} items.</p>
                                                 </div>
                                             </div>
                                             <div className="my-4">
                                                 <div className="flex justify-between">
                                                     <p>Total ({quantity} item)</p>
-                                                    <p className="font-bold">${quantity * props.price}</p>
+                                                    <p className="font-bold">${total.toFixed(2)}</p>
                                                 </div>
                                             </div>
                                             <div className="flex mx-auto gap-4">
-                                                <a href={`http://127.0.0.1:8000/api/add/${props.id}/to/cart/${user.id}`} className="w-full text-center font-medium py-4" style={{ color:"#40CDCC" , borderRadius:"4px" , fontSize:"20px" , border:"1px solid #40CDCC"}}>Add To Cart</a>
+                                                <a href={`http://127.0.0.1:8000/api/add/${props.id}/to/cart/${user.id}?qty=${quantity}`} className="w-full text-center font-medium py-4" style={{ color:"#40CDCC" , borderRadius:"4px" , fontSize:"20px" , border:"1px solid #40CDCC"}}>Add To Cart</a>
                                                 <button className="w-full font-medium py-4" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"20px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Buy Now</button>
                                             </div>
                                         </div>

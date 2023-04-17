@@ -27,7 +27,7 @@ function View(){
                 {product.map((item) => {
                     return(
                         <>
-                            <ViewProductComponent id={item.id} image={item.image} name={item.name} price={item.price} />
+                            <ViewProductComponent id={item.id} max_buy={item.max_buy} image={item.image} name={item.name} price={item.price} status={item.status} shipment_status={item.shipment_status} shipment_estimate={item.shipment_estimate} />
                             <DescriptionComponent description_image={item.description_image} />
                             <InformationComponent product_name={item.information_id.product_name} />
                             <AboutComponent />
