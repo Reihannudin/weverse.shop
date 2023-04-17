@@ -14,7 +14,6 @@ use Ramsey\Uuid\Type\Time;
 class CartController extends Controller
 {
     public function cart($user_id){
-
         $cart  = CartResource::collection(
             Cart::query()->where('user_id' ,'=' ,intval($user_id))->get()
         );
@@ -23,14 +22,8 @@ class CartController extends Controller
     }
 
     public function addToCart(Request $request , $product_id ,$user_id ){
-
         $qty = $request->query('qty');
-
-//        dd($qty);
-
         $cart_exists = DB::table('carts')->where('user_id' , $user_id)->where('product_id' , $product_id)->exists();
-//        dd($cart_exists);
-
         if ($cart_exists){
             $error = "Product already in cart";
              return back();
@@ -69,20 +62,16 @@ class CartController extends Controller
             'quantity' => $cart[0]->quantity - 1
         ]);
         return redirect(env('APP_FE_URL') . '/cart');
-
     }
 
     public function cartTotalItem($user_id)
     {
-
         $cartQty = Cart::query()->select('quantity')->where('user_id' , $user_id)->get();
         $cartQtyCount = $cartQty->count();
         return response()->json($cartQtyCount);
-
     }
 
     public function cartTotalPrice($user_id){
-
         $cartItems = Cart::query()->where('user_id' , $user_id)->get();
 
         $totalPrice = 0;
@@ -95,7 +84,15 @@ class CartController extends Controller
 
 
         return response()->json($formatted_total);
+    }
 
+    public function cartRemoveSoldout($user_id){
+        $product_sold = Products::query()->where('quantity' ,'=' , 0)->get();
+
+        foreach ($product_sold as  $soldout){
+            Cart::query()->where('user_id' , $user_id)->where('product_id' , $soldout->id)->delete();
+        }
+        return redirect(env('APP_FE_URL') . '/cart');
     }
 
 }

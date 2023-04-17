@@ -42,6 +42,7 @@ Route::get('/add/{product_id}/to/cart/{user_id}' , [CartController::class , 'add
 Route::get('/cart/total/item/{user_id}' , [CartController::class , 'cartTotalItem']);
 Route::get('/cart/total/price/{user_id}' , [CartController::class , 'cartTotalPrice']);
 Route::get('/cart/remove/{rows_id}' , [CartController::class , 'cartRemove']);
+Route::get('/cart/{user_id}/remove/sold' , [CartController::class , 'cartRemoveSoldout']);
 Route::get('/cart/int/{rows_id}' , [CartController::class , 'cartIncrement']);
 Route::get('/cart/dec/{rows_id}' , [CartController::class , 'cartDecrement']);
 
