@@ -24,6 +24,10 @@ class CartController extends Controller
 
     public function addToCart(Request $request , $product_id ,$user_id ){
 
+        $qty = $request->query('qty');
+
+//        dd($qty);
+
         $cart_exists = DB::table('carts')->where('user_id' , $user_id)->where('product_id' , $product_id)->exists();
 //        dd($cart_exists);
 
@@ -34,7 +38,7 @@ class CartController extends Controller
             DB::table('carts')->insert([
                 'user_id' => $user_id,
                 'product_id' => $product_id,
-                'quantity' => 1,
+                'quantity' => $qty,
                 'created_at' => Carbon::now(),
             ]);
 

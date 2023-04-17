@@ -29,6 +29,11 @@ class ProductResource extends JsonResource
             'description_image' => $this->description_images,
             'information_id' => $this->information,
             'sub_category_id' => $this->type->id,
+            'quantity' => $this->quantity,
+            'max_buy' => $this->maxBuy ,
+            'status' => $this->status ,
+            'shipment_status' => $this->shipment_status,
+            'shipment_estimate' => $this->shipment_estimate,
             'created_at' => $this->created_at->toDateString(),
 //            'updated_at' => $this->updated_at->toDateString(),
 
