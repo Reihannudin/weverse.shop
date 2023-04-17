@@ -11,6 +11,9 @@ export const ViewProductComponent = (props) =>{
     const decrementQuantity = () => {
         setQuantity(quantity--)
     }
+
+    const user = JSON.parse(localStorage.getItem('whoLogin'));
+
     return(
         <>
             <div className="w-full pb-10 mb-10" >
@@ -79,7 +82,7 @@ export const ViewProductComponent = (props) =>{
                                                 </div>
                                             </div>
                                             <div className="flex mx-auto gap-4">
-                                                <button className="w-full font-medium py-4" style={{ color:"#40CDCC" , borderRadius:"4px" , fontSize:"20px" , border:"1px solid #40CDCC"}}>Add To Cart</button>
+                                                <a href={`http://127.0.0.1:8000/api/add/${props.id}/to/cart/${user.id}`} className="w-full text-center font-medium py-4" style={{ color:"#40CDCC" , borderRadius:"4px" , fontSize:"20px" , border:"1px solid #40CDCC"}}>Add To Cart</a>
                                                 <button className="w-full font-medium py-4" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"20px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Buy Now</button>
                                             </div>
                                         </div>

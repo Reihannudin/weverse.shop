@@ -14,6 +14,14 @@ export const CartListComponent = ({user_id}) => {
             .then((cart => setCart(cart)));
     }, [])
 
+    const [total , setTotal] = useState('0');
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/api/cart/total/price/${user_id}`)
+            .then((response) => response.json())
+            .then(total => setTotal(total))
+    } , [total])
+
+
     const checkIsEmpty = cart.length === 0;
     console.log(cart);
 
@@ -50,15 +58,12 @@ export const CartListComponent = ({user_id}) => {
                                         <p>Select all items</p>
                                     </div>
                                 </div>
-                                {/*<div className="my-14">*/}
-                                {/*    <h2 className="text-center" style={{ color:"#ebebeb"}}>Add Product to Cart</h2>*/}
-                                {/*</div>*/}
                                 <div>
                                     <ul>
                                         {cart.map((item) => {
                                             return(
                                                 <li>
-                                                    <CartCardComponent image={item.product_image} name={item.product_name} price={item.product_price} />
+                                                    <CartCardComponent id={item.id} quantity={item.quantity} image={item.product_image} name={item.product_name} price={item.product_price} />
                                                 </li>
                                             )
                                         })}
@@ -70,7 +75,7 @@ export const CartListComponent = ({user_id}) => {
                                             <h2 className="my-auto font-bold" style={{ fontSize:"20px"}}>Total (1 item)</h2>
                                         </div>
                                         <div className="flex gap-6">
-                                            <h2 className="my-auto font-bold" style={{ fontSize:"20px"}}>$488</h2>
+                                            <h2 className="my-auto font-bold" style={{ fontSize:"20px"}}>${total}</h2>
                                             <button className="w-full font-medium px-8 py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"14px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Check Out</button>
                                         </div>
                                     </div>

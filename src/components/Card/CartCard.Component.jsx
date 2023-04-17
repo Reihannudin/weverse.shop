@@ -1,22 +1,7 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 export const CartCardComponent = (props) => {
-
-    let [quantity , setQuantity] = useState(1);
-
-    const incrementQuantity = () => {
-        // let quantity = document.getElementById('quantity')
-        // eslint-disable-next-line no-unused-vars
-        setQuantity(quantity++)
-    }
-
-    const decrementQuantity = () => {
-        // let quantity = document.getElementById('quantity')
-        // eslint-disable-next-line no-unused-vars
-        setQuantity(quantity--)
-    }
-
     return(
         <>
             <div>
@@ -37,16 +22,18 @@ export const CartCardComponent = (props) => {
                     </div>
                     <div className="flex mx-8">
                         <div className="my-auto">
-                            <button className="px-2" onClick={decrementQuantity} style={{ border:"1px solid #BEBEBE", color:"#ababab",borderRadius:"4px",fontSize:"16px"}}>-</button>
-                            <input className="w-2/12 text-center" id="quantity" type="text"  value={quantity}/>
-                            <button className="px-2" onClick={incrementQuantity} style={{ border:"1px solid #BEBEBE", color:"#ababab", borderRadius:"4px",fontSize:"16px"}}>+</button>
+                            <a href={`http://127.0.0.1:8000/api/cart/dec/${props.id}`} className="px-2" style={{ border:"1px solid #BEBEBE", color:"#ababab",borderRadius:"4px",fontSize:"16px"}}>-</a>
+                            <input className="w-2/12 text-center" id="quantity" type="text"  value={props.quantity}/>
+                            <a href={`http://127.0.0.1:8000/api/cart/int/${props.id}`} className="px-2" style={{ border:"1px solid #BEBEBE", color:"#ababab", borderRadius:"4px",fontSize:"16px"}}>+</a>
                         </div>
                         <div className="flex my-auto gap-14">
                             <div>
                                 <h2 className="font-bold" style={{ fontSize:"18px"}}>${props.price}</h2>
                             </div>
                             <div>
-                                <i className="fa-solid fa-x" style={{ color:"#8a8a8a" }}></i>
+                                <a href={`http://127.0.0.1:8000/api/cart/remove/${props.id}`}>
+                                    <i className="fa-solid fa-x" style={{ color:"#8a8a8a" }}></i>
+                                </a>
                             </div>
                         </div>
                     </div>

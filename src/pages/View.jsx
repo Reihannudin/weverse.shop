@@ -27,7 +27,7 @@ function View(){
                 {product.map((item) => {
                     return(
                         <>
-                            <ViewProductComponent image={item.image} name={item.name} price={item.price} />
+                            <ViewProductComponent id={item.id} image={item.image} name={item.name} price={item.price} />
                             <DescriptionComponent description_image={item.description_image} />
                             <InformationComponent product_name={item.information_id.product_name} />
                             <AboutComponent />
