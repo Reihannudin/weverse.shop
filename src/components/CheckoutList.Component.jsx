@@ -5,6 +5,15 @@ import {CheckoutProductListComponent} from "./Card/CheckoutProductList.Component
 
 export const CheckoutListComponent = () => {
 
+    const popUpAddress = () => {
+        const popUp = document.getElementById('pop_up_address')
+        if(popUp.style.display === 'none'){
+            popUp.style.display = 'block'
+        } else if (popUp.style.display === 'block'){
+            popUp.style.display = 'none'
+        }
+    }
+
     const popUpShipping = () => {
         const popUp = document.getElementById('pop_up_shipping')
         if(popUp.style.display === 'none'){
@@ -71,7 +80,62 @@ export const CheckoutListComponent = () => {
                             <div className="my-8">
                                 <div className="flex my-4 gap-3">
                                     <h2 className="font-bold" style={{ fontSize:"20px"}}>Shipping Address</h2>
-                                    <button className="py-1 px-3" style={{ border:"1px solid #CACACA" , color:"#a8a8a8" , borderRadius:"4px" , fontSize:"15px"}}>Change</button>
+                                    <button className="py-1 px-3" onClick={popUpAddress} style={{ border:"1px solid #CACACA" , color:"#a8a8a8" , borderRadius:"4px" , fontSize:"15px"}}>Change</button>
+                                    <div id="pop_up_address" tabIndex="-1" onclose={popUpAddress}  style={{ display:"none" , background:"rgba(75,75,75,0.67)" }} className="fixed z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+                                        <div className="absolute w-6/12 mx-auto h-full max-w-2xl md:h-auto" style={{ left:"32%"}}>
+                                            <div className="relative bg-white w-9/12 top-8 rounded-lg shadow dark:bg-gray-700" style={{ height:"550px"}} >
+                                                <div className="flex items-start  py-6 px-4 border-b rounded-t dark:border-gray-600">
+                                                    <button type="button"  onClick={popUpAddress}  style={{ color:"#08CCCA" , fontSize:"17px"}} className="bg-transparent flex gap-2 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                                        <i className="fa-solid fa-plus"></i>
+                                                        <p>Add</p>
+                                                    </button>
+                                                    <h3 className="text-xl font-bold w-full mx-auto font-bold text-center text-gray-900 dark:text-white">
+                                                        Select Shipping Address
+                                                    </h3>
+                                                    <button type="button"  onClick={popUpAddress} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                                                        <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                        <span className="sr-only">Close modal</span>
+                                                    </button>
+                                                </div>
+                                                <div className="w-5/5 mx-auto" style={{ height:"370px" , overflowY:"scroll"}}>
+                                                    <div className="mx-6 my-4">
+                                                        <ul>
+                                                            <li>
+                                                                <div className="flex" style={{ borderBottom:"1px solid #ebebeb"}}>
+                                                                    <div className="mx-3 my-auto">
+                                                                        <input className="my-auto" style={{ border:"1px solid #ebebeb"}} type="radio"/>
+                                                                    </div>
+                                                                    <div className="mx-2">
+                                                                        <div className="flex gap-3" style={{color:"#08CCCA"}}>
+                                                                            <p>Andrian Raihannudin</p>
+                                                                            <p className="py-0 px-1" style={{ border:"1px solid #08CCCA" , fontSize:"13px", borderRadius:"8px"}}>Default</p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p style={{ fontSize:"15px"}}>Grand catania block O5/39, Ciakar, Panongan,Kab.Tangerang,Banten kab.Tangerang, Banten</p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p>15710</p>
+                                                                            <p>Indonesia</p>
+                                                                            <p>+62 87773301182</p>
+                                                                        </div>
+                                                                        <div className="flex mt-2 mb-4 gap-2">
+                                                                            <button className="py-0.5 px-3" style={{ border:"1px solid #CACACA" , color:"#a8a8a8" , borderRadius:"4px" , fontSize:"15px"}}>Edit</button>
+                                                                            <button className="py-0.5 px-3" style={{ border:"1px solid #CACACA" , color:"#a8a8a8" , borderRadius:"4px" , fontSize:"15px"}}>Delete</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div className="mx-6 py-7">
+                                                    <a>
+                                                        <button className="w-full font-medium py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Save</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>
                                     <div>
