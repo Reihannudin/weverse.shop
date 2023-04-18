@@ -23,9 +23,13 @@ class CartController extends Controller
 
     public function addToCart(Request $request , $product_id ,$user_id ){
         $qty = $request->query('qty');
+        $cart = DB::table('carts')->where('user_id' , $user_id)->where('product_id' , $product_id)->get();
         $cart_exists = DB::table('carts')->where('user_id' , $user_id)->where('product_id' , $product_id)->exists();
         if ($cart_exists){
-            $error = "Product already in cart";
+            DB::table('carts')->where('user_id' , $user_id)->where('product_id' , $product_id)->update([
+                'quantity' => $cart[0]->quantity + $qty,
+                'updated_at' => Carbon::now(),
+            ]);
              return back();
         }else{
             DB::table('carts')->insert([
@@ -36,8 +40,11 @@ class CartController extends Controller
             ]);
 
             $message = "You successfully add product on your cart";
-
             return back();
+
+//            return redirect()->back();
+//            return redirect(env('APP_FE_URL') . '/my/addresses');
+//            return back();
         }
 
     }
