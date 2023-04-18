@@ -17,27 +17,27 @@ class UserController extends Controller
     public function addAddress(Request $request, $user_id){
         $name = $request->query('name');
         $lastname = $request->query('lastname');
-        $country = $request->query('indonesia');
-        $street= $request->query('street');
+        $country = $request->query('country');
+        $street= $request->query('address');
         $city = $request->query('city');
         $state = $request->query('state');
-        $post_code = $request->query('post_code');
-        $phone_number = $request->query('phone_number');
+        $post_code = $request->query('postal');
+        $contact = $request->query('contact');
 
-        Address::created([
-            'receiver' => $name + $lastname,
-            'phone_number' => $phone_number,
+        Address::query()->create([
+            'receiver' => $name . " " . $lastname,
+            'phone_number' => $contact,
             'isDefault' => 0,
             'street' =>  $street,
             'city' => $city,
             'state' => $state,
-            'user_id' => $user_id,
-            'post_code' => $post_code,
             'country' => $country,
+            'user_id' => $user_id,
+            'postcode' => $post_code,
             'created_at' => Carbon::now()
         ]);
 
-        return response()->json('You successfully add new address');
+        return redirect(env('APP_FE_URL') . '/my/addresses');
 
     }
 
@@ -52,25 +52,27 @@ class UserController extends Controller
         $post_code = $request->query('post_code');
         $phone_number = $request->query('phone_number');
 
-        Address::query()->where('id' , $rows_id)->update([
-            'receiver' => $name + $lastname,
-            'phone_number' => $phone_number,
-            'isDefault' => 0,
-            'street' =>  $street,
-            'city' => $city,
-            'state' => $state,
-            'post_code' => $post_code,
-            'country' => $country,
-            'updated_at' => Carbon::now()
-        ]);
+        $address = Address::query()->where('id' , $rows_id)->get();
+        return response()->json($address);
 
-        return response()->json('Successfully edit you address');
+//        Address::query()->where('id' , $rows_id)->update([
+//            'receiver' => $name + $lastname,
+//            'phone_number' => $phone_number,
+//            'isDefault' => 0,
+//            'street' =>  $street,
+//            'city' => $city,
+//            'state' => $state,
+//            'post_code' => $post_code,
+//            'country' => $country,
+//            'updated_at' => Carbon::now()
+//        ]);
+
+//        return response()->json('Successfully edit you address');
 
     }
 
     public function removeAddress($rows_id){
         Address::query()->where('id' , $rows_id)->delete();
-        return response()->json(['success' => 'Successfully Remove From Cart']);
-
+        return redirect(env('APP_FE_URL') . '/my/addresses');
     }
 }
