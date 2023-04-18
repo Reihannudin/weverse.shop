@@ -50,6 +50,8 @@ Route::get('/cart/dec/{rows_id}' , [CartController::class , 'cartDecrement']);
 Route::get('/my/address/{user_id}' , [UserController::class , 'address']);
 Route::get('/my/address/new/{user_id}' , [UserController::class , 'addAddress']);
 Route::get('/my/address/edit/{rows_id}' , [UserController::class , 'editAddress']);
+Route::get('/my/address/edit/p/{rows_id}' , [UserController::class , 'editPostAddress']);
+
 Route::get('/my/address/remove/{rows_id}' , [UserController::class , 'removeAddress']);
 
 Route::get('/banner' , [ShopController::class , 'banner']); // success
