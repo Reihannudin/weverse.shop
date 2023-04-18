@@ -22,6 +22,7 @@ import Logout from "./pages/Logout";
 import AddPassword from "./pages/AddPassword";
 import AddInformation from "./pages/AddInformation";
 import AddPasswordSignUp from "./pages/AddPasswordSignUp";
+import {EditAddressComponent} from "./components/Card/EditAddress.Component";
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
                   <Route path="/order/returnExchange/history" element={<Return />}></Route>
                   <Route path="/support" element={<Support />}></Route>
                   <Route path="/my/addresses" element={<Address />}></Route>
+                  <Route path="/my/addresses/edit/:id" element={<EditAddressComponent />}></Route>
                   <Route path="/shop/:id/notice" element={<Announcement />}></Route>
                   <Route path="/shop/:id/events" element={<Events />}></Route>
                   <Route path="/testing" element={<TabsRender />}></Route>
