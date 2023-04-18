@@ -4,6 +4,17 @@ import {CheckoutProductListComponent} from "./Card/CheckoutProductList.Component
 
 
 export const CheckoutListComponent = () => {
+
+    const popUpShipping = () => {
+        const popUp = document.getElementById('pop_up_shipping')
+        if(popUp.style.display === 'none'){
+            popUp.style.display = 'block'
+        } else if (popUp.style.display === 'block'){
+            popUp.style.display = 'none'
+        }
+    }
+
+
     return(
         <>
             <div className="w-full pb-14">
@@ -100,7 +111,61 @@ export const CheckoutListComponent = () => {
                             <div className="my-8">
                                 <div className="flex my-4 gap-3">
                                     <h2 className="font-bold" style={{ fontSize:"20px"}}>Shipping Option</h2>
-                                    <button className="py-1 px-3" style={{ border:"1px solid #CACACA" , color:"#a8a8a8" , borderRadius:"4px" , fontSize:"15px"}}>Change</button>
+                                    <button className="py-1 px-3"  onClick={popUpShipping} style={{ border:"1px solid #CACACA" , color:"#a8a8a8" , borderRadius:"4px" , fontSize:"15px"}}>Change</button>
+                                    <div id="pop_up_shipping" tabIndex="-1" onclose={popUpShipping}  style={{ display:"none" , background:"rgba(75,75,75,0.67)" }} className="fixed z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+                                        <div className="absolute w-6/12 mx-auto h-full max-w-2xl md:h-auto" style={{ left:"32%"}}>
+                                            <div className="relative bg-white w-9/12 top-10 rounded-lg shadow dark:bg-gray-700" style={{ height:"450px"}} >
+                                                <div className="flex items-start justify-end py-6 px-4 border-b rounded-t dark:border-gray-600">
+                                                    <h3 className="text-xl font-bold w-full ms-5 font-bold text-center text-gray-900 dark:text-white">
+                                                        Select Shipping Method
+                                                    </h3>
+                                                    <button type="button"  onClick={popUpShipping} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                                                        <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                        <span className="sr-only">Close modal</span>
+                                                    </button>
+                                                </div>
+                                                <div className="w-5/5 mx-auto" style={{ height:"270px" , overflowY:"scroll"}}>
+                                                    <div className="mx-10">
+                                                        <div className="flex mt-4 justify-between" style={{ borderBottom:"1px solid #cacaca"}}>
+                                                            <div className="mb-3">
+                                                                <p>Number of items(weight)</p>
+                                                            </div>
+                                                            <div className="mb-3">
+                                                                <p>1 item(1.20kg)</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex gap-3">
+                                                            <div className="my-2.5">
+                                                                <input style={{ width:"22px" ,border:"1px solid #ebebeb"}} type="radio" />
+                                                            </div>
+                                                            <div className="w-4/5">
+                                                                <div className="flex my-2 justify-between" style={{ color:"#08CCCA" , fontSize:"18px"}}>
+                                                                    <div className="text-left">
+                                                                        <p>International Shipping</p>
+                                                                    </div>
+                                                                    <div className="text-right">
+                                                                        <p>$47.14</p>
+                                                                    </div>
+                                                                </div>
+                                                                <p className="my-0 py-0" style={{ fontSize:"13px" , color:"#a9a9a9"}}>
+                                                                    Shipping will usually start within 7 - 14 business days for products.
+Once shipping starts, your order can be tracked by following the steps below:
+Weverse Shop app > My > My Orders > Order Detail
+For pre-orders, the shipping will start on the day indicated in the announcement.
+(The shipping fee may vary depending on your area and the volume of the product. Please check the exact shipping fee at checkout.)
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="mx-6 py-7">
+                                                    <a>
+                                                        <button className="w-full font-medium py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Save</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>
                                     <div>
