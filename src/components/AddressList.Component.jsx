@@ -123,7 +123,7 @@ export const AddressListComponent = () => {
                                                     <div className="flex justify-between pb-5" style={{ borderBottom:"1px solid #ebebeb"}} >
                                                         <div className="w-8/12 font-normal" >
                                                             <div className="flex gap-2" style={{ color:"#08C2CC"}}>
-                                                                <p>{item.receiver}</p>
+                                                                <p>{item.receiver + ' ' + item.lastname}</p>
                                                                 <p className="px-2 my-auto" style={{ border:"1px solid #08C2CC" , borderRadius:"16px" , fontSize:"12px"}}>DEFAULT</p>
                                                             </div>
                                                             <div className="text-left mt-1 mb-0 py-0">
@@ -228,7 +228,7 @@ export const AddressListComponent = () => {
                                                 </div>
                                             </div>
                                             <div className="mx-6 py-7">
-                                                <a href={`http://127.0.0.1:8000/api/my/address/new/81?name=${name}&lastname=${lastname}&address=${address}&city=${city}&state=${state}&country=${country}&postal=${postal}&contact=${contact}`}>
+                                                <a href={`http://127.0.0.1:8000/api/my/address/new/${user.id}?name=${name}&lastname=${lastname}&address=${address}&city=${city}&state=${state}&country=${country}&postal=${postal}&contact=${contact}`}>
                                                     <button className="w-full font-medium py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Save</button>
                                                 </a>
                                             </div>

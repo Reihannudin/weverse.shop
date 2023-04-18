@@ -1,78 +1,117 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 export const EditAddressComponent = () => {
 
     const params = useParams();
-    const [editData, setEditData] = useState('');
-    // http://127.0.0.1:8000/api/my/address/81
+    const navigation = useNavigate();
+    const [editData, setEditData] = useState([]);
+
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/my/address/edit/${params.id}`)
             .then((response) => response.json())
             .then(editData => setEditData(editData))
-    } , [editData])
+    }, [params.id]);
 
-    console.log(editData)
-    // const ids = editData[0].id;
-    // const receivers = editData[0].receiver;
-    // const streets = editData[0].street;
-    // const phone_numbers = editData[0].phone_number;
-    // const postcodes = editData[0].postcode;
-    // const countrys = editData[0].country;
-    // const citys = editData[0].city;
-    // const states = editData[0].state;
 
-    const [name , setName] = useState('');
-    const [lastname , setLastname] = useState('');
-    const [address , setAddress] = useState('');
-    const [city , setCity] = useState('');
-    const [state , setState] = useState('');
-    const [country , setCountry] = useState('');
-    const [postal  , setPostal] = useState('');
-    const [contact , setContact] = useState('');
-    const [accept , setAccept] = useState(false);
-    const [isdefault , setIsDefault] = useState(false);
-
+    let [name , setName] = useState('');
+    useEffect(() => {
+       let reciver = editData[0]?.receiver || '';
+       setName(reciver)
+    }, [editData]);
     const onChangeName = (event) => {
         const name = event.target.value;
         setName(name)
         console.log(name)
     }
 
+    const [lastname , setLastname] = useState('');
+    useEffect(() => {
+        let reciver = editData[0]?.lastname || '';
+        setLastname(reciver)
+    }, [editData]);
     const onChangeLastname = (event) =>{
         const lastname = event.target.value;
         setLastname(lastname)
     }
 
-    const onChangeAddress = (event) => {
-        const address = event.target.value;
-        setAddress(address)
+    const [contact , setContact] = useState('');
+    useEffect(() => {
+        let contact = editData[0]?.phone_number || '';
+        setContact(contact)
+    }, [editData]);
+    const onChangeContact = (event) => {
+        const contact = event.target.value;
+        setContact(contact)
     }
 
+    const [city , setCity] = useState('');
+    useEffect(() => {
+        let city = editData[0]?.city || '';
+        setCity(city)
+    }, [editData]);
     const onChangeCity = (event) => {
         const city = event.target.value;
         setCity(city)
     }
 
+    const [state , setState] = useState('');
+    useEffect(() => {
+        let state = editData[0]?.state || '';
+        setState(state)
+    }, [editData]);
     const onChangeState = (event) =>{
         const state = event.target.value;
         setState(state)
     }
 
-    const onChangeCountry = (event) =>{
-        const country = event.target.value;
-        setCountry(country)
-    }
-
+    const [postal  , setPostal] = useState('');
+    useEffect(() => {
+        let postcode = editData[0]?.postcode || '';
+        setPostal(postcode)
+    }, [editData]);
     const onChangePostal = (event) => {
         const postal = event.target.value;
         setPostal(postal)
     }
 
-    const onChangeContact = (event) => {
-        const contact = event.target.value;
-        setContact(contact)
+    const [country , setCountry] = useState('');
+    useEffect(() => {
+        let country = editData[0]?.country || '';
+        setCountry(country)
+    }, [editData]);
+    const onChangeCountry = (event) =>{
+        const country = event.target.value;
+        setCountry(country)
     }
+
+    let [address , setAddress] = useState('');
+    useEffect(() => {
+        let street = editData[0]?.street || '';
+        setAddress(street);
+    }, [editData]);
+
+    const onChangeAddress = (event) => {
+        const address = event.target.value;
+        setAddress(address);
+    };
+
+
+    // const ids = editData[0].id;
+    // const receivers = editData[0].receiver;
+
+    // const phone_numbers = editData[0].phone_number;
+    // const postcodes = editData[0].postcode;
+    // const countrys = editData[0].country;
+    // const citys = editData[0].city;
+    // const states = editData[0].state;
+
+
+
+    const [accept , setAccept] = useState(false);
+    const [isdefault , setIsDefault] = useState(false);
+
+
 
     const onChangeAccept = (event) =>{
         const accept = event.target.value;
@@ -91,16 +130,11 @@ export const EditAddressComponent = () => {
                 {/* onclose={popUpAddressEdit}*/}
                 <div className="absolute w-6/12 mx-auto h-full max-w-2xl md:h-auto" style={{ left:"32%"}}>
                     <div className="relative bg-white w-9/12 top-8 rounded-lg shadow dark:bg-gray-700" style={{ height:"550px"}} >
-                        <div className="flex items-start justify-end py-6 ms-3 px-4 border-b rounded-t dark:border-gray-600">
-                            <button type="button" className="text-gray-400 mb-2 gap-2 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
-                                <i className="fa-solid fa-trash"></i>
-                                <span style={{ fontSize:"16px"}}>Delete</span>
-                            </button>
-                            <h3 className="text-xl font-bold w-full ms-10 font-bold text-left text-gray-900 dark:text-white">
+                        <div className="flex items-start justify-end py-6 px-4 border-b rounded-t dark:border-gray-600">
+                            <h3 className="text-xl font-bold w-full ms-5 font-bold text-center text-gray-900 dark:text-white">
                                 Edit Shipping Address
                             </h3>
-                            {/*onClick={() => popUpAddressEdit(item)} */}
-                            <button type="button"  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                            <button type="button"  onClick={navigation(-1)} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
                                 <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                 <span className="sr-only">Close modal</span>
                             </button>
@@ -169,8 +203,8 @@ export const EditAddressComponent = () => {
                         </div>
                         <div className="mx-6 py-7">
                             {/*http://127.0.0.1:8000/api/my/address/new/81*/}
-                            <a href={`http://127.0.0.1:8000/api/my/address/new/81`}>
-                                <button className="w-full font-medium py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Save</button>
+                            <a href={`http://127.0.0.1:8000/api/my/address/edit/p/${params.id}?name=${name}&lastname=${lastname}&address=${address}&city=${city}&state=${state}&country=${country}&postal=${postal}&contact=${contact}`}>
+                            <button className="w-full font-medium py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Save</button>
                             </a>
                         </div>
                     </div>
