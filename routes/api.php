@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
@@ -38,7 +39,8 @@ Route::get('/logout', function () {
 });
 
 //payment
-Route::get('/payment' , [PaymentController::class , 'all']);
+Route::get('/payment' , [OrderController::class , 'payment']);
+Route::get('/shipping' , [OrderController::class , 'shipping']);
 
 //cart
 Route::get('/cart/{user_id}' , [CartController::class , 'cart']);
