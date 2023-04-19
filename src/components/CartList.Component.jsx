@@ -41,9 +41,18 @@ export const CartListComponent = ({user_id}) => {
             .then(total => setTotal(total))
     } , [total])
 
+    const [qty , setQty] = useState('0');
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/api/cart/total/item/${user_id}`)
+            .then((response) => response.json())
+            .then(qty => setQty(qty))
+    } , [qty])
 
     const checkIsEmpty = cart.length === 0;
     const user = JSON.parse(localStorage.getItem('whoLogin'));
+
+    const cartItemString =  JSON.stringify(cart);
+    localStorage.setItem("carts", cartItemString);
 
     return(
         <>
@@ -165,11 +174,13 @@ export const CartListComponent = ({user_id}) => {
                                 <div className="py-6" style={{ background:"#FFFEED" , borderTop:"1px solid #ebebeb"}}>
                                     <div className="flex mx-8 justify-between">
                                         <div className="my-auto">
-                                            <h2 className="my-auto font-bold" style={{ fontSize:"20px"}}>Total (1 item)</h2>
+                                            <h2 className="my-auto font-bold" style={{ fontSize:"20px"}}>Total (${qty} item)</h2>
                                         </div>
                                         <div className="flex gap-6">
                                             <h2 className="my-auto font-bold" style={{ fontSize:"20px"}}>${total}</h2>
-                                            <button className="w-full font-medium px-8 py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"14px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Check Out</button>
+                                            <a href={`/order/checkout/`}>
+                                                <button className="w-full font-medium px-8 py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"14px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Check Out</button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

@@ -45,7 +45,7 @@ function App() {
                   <Route path="/logout" element={<Logout />}/>
                   <Route path="/login/redirect" element={<Login />} />
                   <Route path="/cart" element={<Cart />}></Route>
-                  <Route path="/:lang_id/order/checkout/:currency_id/" element={<Checkout />}></Route>
+                  <Route path="/order/checkout/" element={<Checkout />}></Route>
                   <Route path="/order/history" element={<Order />}></Route>
                   <Route path="/order/returnExchange/history" element={<Return />}></Route>
                   <Route path="/support" element={<Support />}></Route>

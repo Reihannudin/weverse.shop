@@ -1,9 +1,35 @@
 import {Link} from "react-router-dom";
 import {CartCardComponent} from "./Card/CartCard.Component";
 import {CheckoutProductListComponent} from "./Card/CheckoutProductList.Component";
+import {useEffect, useState} from "react";
 
 
 export const CheckoutListComponent = () => {
+
+    const user = JSON.parse(localStorage.getItem('whoLogin'));
+
+    const [product , setProduct] = useState([]);
+    useEffect(() =>{
+        // get data from API
+        fetch(`http://127.0.0.1:8000/api/cart/${user.id}`)
+            //     // make respionse to jsonn
+            .then((response) => response.json())
+            .then((product => setProduct(product)));
+    }, [product])
+
+    const [total , setTotal] = useState('0');
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/api/cart/total/price/${user.id}`)
+            .then((response) => response.json())
+            .then(total => setTotal(total))
+    } , [total])
+
+    const [qty , setQty] = useState('0');
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/api/cart/total/item/${user.id}`)
+            .then((response) => response.json())
+            .then(qty => setQty(qty))
+    } , [qty])
 
     const popUpAddress = () => {
         const popUp = document.getElementById('pop_up_address')
@@ -63,14 +89,20 @@ export const CheckoutListComponent = () => {
                                 </div>
                                 <div className="mt-8 mb-14">
                                     <div>
-                                        <CheckoutProductListComponent />
+                                        <ul>
+                                            {product.map((item) => {
+                                                return(
+                                                    <CheckoutProductListComponent image={item.product_image} name={item.product_name} price={item.product_price} qty={item.quantity} />
+                                                )
+                                            })}
+                                        </ul>
                                     </div>
                                     <div className="flex justify-between">
                                         <div>
-                                            <p>Total (1 item)</p>
+                                            <p>Total ({qty} item)</p>
                                         </div>
                                         <div className="font-bold">
-                                            <p>$17.18</p>
+                                            <p>${total}</p>
                                         </div>
                                     </div>
                                 </div>
