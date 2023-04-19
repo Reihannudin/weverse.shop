@@ -1,24 +1,43 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
 // Declare the constant variable outside the component scope
 const initialData = {name: "John", age: 25};
 
 function TabsRender(){
-    // Use useState to initialize the state variable
-    const [data, setData] = useState(initialData);
+    const [stations, setStations] = useState([]);
+    const [selectedStation, setSelectedStation] = useState(null);
 
-    // Update the state variable
-    const handleUpdate = () => {
-        setData({...data, age: 30});
-    }
+    useEffect(() => {
+        fetch("https://your-radio-api.com/stations")
+            .then((response) => response.json())
+            .then((data) => setStations(data))
+            .catch((error) => console.error(error));
+    }, []);
+
+    const handleStationSelect = (station) => {
+        setSelectedStation(station);
+    };
 
     return (
         <div>
-            <p>Name: {data.name}</p>
-            <p>Age: {data.age}</p>
-            <button onClick={handleUpdate}>Update Age</button>
+            <h1>Radio App</h1>
+            <ul>
+                {stations.map((station) => (
+                    <li key={station.id}>
+                        <button onClick={() => handleStationSelect(station)}>
+                            {station.name}
+                        </button>
+                    </li>
+                ))}
+            </ul>
+            {selectedStation && (
+                <div>
+                    <h2>Now Playing: {selectedStation.name}</h2>
+                    <audio src={selectedStation.streamUrl} controls />
+                </div>
+            )}
         </div>
     );
-}
+ }
 
 export default TabsRender
