@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TypeController;
@@ -35,6 +36,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/logout', function () {
     return "logout";
 });
+
+//payment
+Route::get('/payment' , [PaymentController::class , 'all']);
 
 //cart
 Route::get('/cart/{user_id}' , [CartController::class , 'cart']);

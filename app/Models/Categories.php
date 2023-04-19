@@ -21,5 +21,4 @@ class Categories extends Model
             'product_id');
     }
 
-
 }

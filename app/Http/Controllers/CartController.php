@@ -39,12 +39,8 @@ class CartController extends Controller
                 'created_at' => Carbon::now(),
             ]);
 
-            $message = "You successfully add product on your cart";
+//            $message = "You successfully add product on your cart";
             return back();
-
-//            return redirect()->back();
-//            return redirect(env('APP_FE_URL') . '/my/addresses');
-//            return back();
         }
 
     }
