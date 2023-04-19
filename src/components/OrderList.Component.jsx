@@ -1,4 +1,5 @@
 import {CartCardComponent} from "./Card/CartCard.Component";
+import {OrderCardComponent} from "./Card/OrderCard.Component";
 
 
 export const OrderListComponent = () => {
@@ -25,18 +26,17 @@ export const OrderListComponent = () => {
                             </div>
                         </div>
                         <div>
-                            <div className="py-44">
-                                <h2 className="text-center" style={{ color:"#bdbdbd"}}>No Orders</h2>
-                                <button className="w-2/12 my-4 font-medium py-3 " style={{ color:"#40CDCC" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC"}}>Shop Now</button>
-                            </div>
-                            {/*<div>*/}
-                            {/*    <ul>*/}
-                            {/*        <li>*/}
-                            {/*            /!*<CartCardComponent />*!/*/}
-                            {/*        </li>*/}
-                            {/*    </ul>*/}
+                            {/*<div className="py-28">*/}
+                            {/*    <h2 className="text-center" style={{ color:"#bdbdbd"}}>No Orders</h2>*/}
+                            {/*    <button className="w-2/12 my-4 font-medium py-3 " style={{ color:"#40CDCC" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC"}}>Shop Now</button>*/}
                             {/*</div>*/}
-
+                            <div className="pb-14">
+                                <ul>
+                                    <li>
+                                        <OrderCardComponent />
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
