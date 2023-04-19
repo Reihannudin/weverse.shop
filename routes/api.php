@@ -40,6 +40,7 @@ Route::get('/logout', function () {
 
 //payment
 Route::get('/payment' , [OrderController::class , 'payment']);
+Route::get('/payment/{payment_id}' , [OrderController::class , 'paymentShow']);
 Route::get('/shipping' , [OrderController::class , 'shipping']);
 
 //cart
