@@ -377,7 +377,7 @@ For pre-orders, the shipping will start on the day indicated in the announcement
                                 <div>
                                     <div>
                                         <div className="flex gap-2">
-                                            <input className="py-2  px-2 w-3/12" placeholder="$0" style={{ background:"#FAFBFC" , border:"1px solid #ADB1B8" , borderRadius:"4px"}} type="text"/>
+                                            <input className="py-2  px-2 w-3/12" placeholder="$0" disabled style={{ background:"#FAFBFC" , border:"1px solid #ADB1B8" , borderRadius:"4px"}} type="text"/>
                                             <button className="px-4 font-normal" style={{ color:"#717172",  background:"#FAFBFC" , border:"1px solid #ADB1B8" , borderRadius:"4px"}}>Use All</button>
                                         </div>
                                         <div className="my-2">
@@ -401,10 +401,10 @@ For pre-orders, the shipping will start on the day indicated in the announcement
                                 </div>
                                 <div className="flex my-6 justify-between" style={{ fontSize:"17px"}} >
                                     <div className="text-left">
-                                        <p>Subtotal (1 item)</p>
+                                        <p>Subtotal ({qty} item)</p>
                                     </div>
                                     <div className="text-right">
-                                        <p className="font-bold">$17.18</p>
+                                        <p className="font-bold">${total}</p>
                                     </div>
                                 </div>
                                 <div className="flex my-6 justify-between" style={{ fontSize:"17px"}}>
@@ -428,7 +428,7 @@ For pre-orders, the shipping will start on the day indicated in the announcement
                                         <p className="font-bold">Grand Total</p>
                                     </div>
                                     <div className="text-right">
-                                        <p className="font-bold">$17.18</p>
+                                        <p className="font-bold">${parseFloat(total) + 47.14}</p>
                                     </div>
                                 </div>
                                 <div className="flex my-3 justify-between" style={{ color:"#05C46B"}} >
