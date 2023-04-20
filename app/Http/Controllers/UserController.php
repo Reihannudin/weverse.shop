@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function customer($user_id){
+        $user = User::query()->where('id' , $user_id)->get();
+        return response()->json($user);
+    }
+
     public function address($user_id){
         $address = Address::query()->where('user_id' , $user_id)->get();
 //        dd($address);
@@ -101,7 +108,6 @@ class UserController extends Controller
 //        return response()->json('Successfully edit you address');
 
     }
-
 
     public function removeAddress($rows_id){
         Address::query()->where('id' , $rows_id)->delete();
