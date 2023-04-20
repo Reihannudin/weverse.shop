@@ -34,7 +34,13 @@ export const CheckoutListComponent = () => {
         navigate(`?paymentid=${payment.id}`);
     }
 
-    const [address , setAddress] = useState(0);
+    const [customer, setCustomer] = useState([]);
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/api/customer/${user.id}`)
+            .then((response) => response.json())
+            .then(customer => setCustomer(customer))
+    } , [customer]);
+
     const addressId = searchParams.get("addressid");
 
     localStorage.setItem('addressId' , addressId)
@@ -97,15 +103,6 @@ export const CheckoutListComponent = () => {
 
     const popUpShipping = () => {
         const popUp = document.getElementById('pop_up_shipping')
-        if(popUp.style.display === 'none'){
-            popUp.style.display = 'block'
-        } else if (popUp.style.display === 'block'){
-            popUp.style.display = 'none'
-        }
-    }
-
-    const popUpCustomer = () => {
-        const popUp = document.getElementById('pop_up_customer')
         if(popUp.style.display === 'none'){
             popUp.style.display = 'block'
         } else if (popUp.style.display === 'block'){
@@ -262,66 +259,20 @@ export const CheckoutListComponent = () => {
                             <div className="my-8">
                                 <div className="flex my-4 gap-3">
                                     <h2 className="font-bold" style={{ fontSize:"20px"}}>Customer</h2>
-                                    <button className="py-1 px-3" onClick={popUpCustomer} style={{ border:"1px solid #CACACA" , color:"#a8a8a8" , borderRadius:"4px" , fontSize:"15px"}}>Edit</button>
-                                    <div id="pop_up_customer" tabIndex="-1" onclose={popUpCustomer}  style={{ display:"none" , background:"rgba(75,75,75,0.67)" }} className="fixed z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
-                                        <div className="absolute w-6/12 mx-auto h-full max-w-2xl md:h-auto" style={{ left:"32%"}}>
-                                            <div className="relative bg-white w-9/12 top-8 rounded-lg shadow dark:bg-gray-700" style={{ height:"550px"}} >
-                                                <div className="flex items-start justify-end py-6 px-4 border-b rounded-t dark:border-gray-600">
-                                                    <h3 className="text-xl font-bold w-full ms-5 font-bold text-center text-gray-900 dark:text-white">
-                                                        Add Shipping Address
-                                                    </h3>
-                                                    <button type="button"  onClick={popUpCustomer} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
-                                                        <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                                        <span className="sr-only">Close modal</span>
-                                                    </button>
-                                                </div>
-                                                <div className="w-5/5 mx-auto" style={{ height:"370px" , overflowY:"scroll"}}>
-                                                    <div className="mx-10">
-                                                        <div className="flex my-5 gap-2">
-                                                            <input type="radio" style={{width:"18px"}}/>
-                                                            <p style={{ fontSize:"16px"}}>Load Same info as Shipping Address</p>
-                                                        </div>
-                                                        <div className="text-left my-3">
-                                                            <label className="" style={{ fontSize:"14px"}}>Name</label>
-                                                            <input className="w-full py-3 my-1 font-light px-3"  style={{ border:"1px solid #ebebeb" , borderRadius:"4px" , color:"#9d9d9d"}} placeholder="Enter first name (English)" type="text"/>
-                                                        </div>
-                                                        <div className="text-left my-3">
-                                                            <label className="" style={{ fontSize:"14px"}}>Lastname</label>
-                                                            <input className="w-full py-3 my-1 font-light px-3"  style={{ border:"1px solid #ebebeb" , borderRadius:"4px" , color:"#9d9d9d"}} placeholder="Enter last name (English)" type="text"/>
-                                                        </div>
-
-                                                        <div className="text-left my-6">
-                                                            <label className="" style={{ fontSize:"14px"}}>Emaily</label>
-                                                            <input className="w-full py-3 my-1 font-light px-3" style={{ border:"1px solid #ebebeb" , borderRadius:"4px" , color:"#9d9d9d"}} placeholder="Enter city" type="email"/>
-                                                        </div>
-                                                        <div className="text-left my-3">
-                                                            <label className="" style={{ fontSize:"14px"}}>Phone Number</label>
-                                                            <input className="w-full py-3 my-1 font-light px-3"  style={{ border:"1px solid #ebebeb" , borderRadius:"4px" , color:"#9d9d9d"}} placeholder="Enter phone number" type="number"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="mx-6 py-7">
-                                                    <a>
-                                                        <button className="w-full font-medium py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Save</button>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div>
-                                    <div>
-                                        <div className="flex gap-2">
-                                            <p>Andrian </p>
-                                            <p>Raihannudin</p>
-                                        </div>
-                                        <div>
-                                            <p>reedbulls91@gmail.com</p>
-                                        </div>
-                                        <div>
-                                            <p>+62 87773301182</p>
-                                        </div>
-                                    </div>
+                                    {customer.map((customerItem) => {
+                                        return(
+                                            <div>
+                                                <div>
+                                                    <p>{customerItem.email}</p>
+                                                </div>
+                                                <div>
+                                                    <p>{customerItem.phone_number}</p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
                             <div className="my-8">
@@ -404,22 +355,26 @@ For pre-orders, the shipping will start on the day indicated in the announcement
                                     <h2 className="font-bold" style={{ fontSize:"20px"}}>Weverse Shop Cash</h2>
                                 </div>
                                 <div>
-                                    <div>
-                                        <div className="flex gap-2">
-                                            <input className="py-2  px-2 w-3/12" placeholder="$0" disabled style={{ background:"#FAFBFC" , border:"1px solid #ADB1B8" , borderRadius:"4px"}} type="text"/>
-                                            <button className="px-4 font-normal" style={{ color:"#717172",  background:"#FAFBFC" , border:"1px solid #ADB1B8" , borderRadius:"4px"}}>Use All</button>
-                                        </div>
-                                        <div className="my-2">
-                                           <div className="flex gap-2">
-                                               <p style={{ color:"#919191"}}>Available now</p>
-                                               <p style={{ color:"#3ECCCD"}}>$0.00</p>
-                                           </div>
-                                            <div className="flex gap-2 my-1">
-                                                <input type="radio"/>
-                                                <p>Always use the entire Cash</p>
+                                    {customer.map((customerItem) => {
+                                        return(
+                                            <div>
+                                                <div className="flex gap-2">
+                                                    <input className="py-2  px-2 w-3/12" placeholder={`$ ${customerItem.cash}`} disabled style={{ background:"#FAFBFC" , border:"1px solid #ADB1B8" , borderRadius:"4px"}} type="text"/>
+                                                    <button className="px-4 font-normal" style={{ color:"#717172",  background:"#FAFBFC" , border:"1px solid #ADB1B8" , borderRadius:"4px"}}>Use All</button>
+                                                </div>
+                                                <div className="my-2">
+                                                    <div className="flex gap-2">
+                                                        <p style={{ color:"#919191"}}>Available now</p>
+                                                        <p style={{ color:"#3ECCCD"}}>$ ${customerItem.cash}</p>
+                                                    </div>
+                                                    <div className="flex gap-2 my-1">
+                                                        <input type="radio"/>
+                                                        <p>Always use the entire Cash</p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
                         </div>
