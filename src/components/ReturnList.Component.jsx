@@ -4,7 +4,7 @@ import {ReturnCardComponent} from "./Card/ReturnCard.Component";
 export const ReturnListComponent = () => {
     return(
         <>
-            <div className="w-full pb-14">
+            <div className="w-full ">
                 <div className="w-10/12 py-4 mx-auto">
                     <div className="mx-5 pt-8">
                         <div className="flex pb-8 ">
@@ -18,7 +18,7 @@ export const ReturnListComponent = () => {
                             {/*<h2 className="text-center" style={{ color:"#bdbdbd"}}>No returns or exchanges.</h2>*/}
                             {/*    <button className="w-2/12 my-4 font-medium py-3 " style={{ color:"#40CDCC" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC"}}>Shop Now</button>*/}
                             {/*</div>*/}
-                            <div className="pb-28">
+                            <div className="pb-16">
                                 <ul>
                                     <li>
                                         <ReturnCardComponent />
