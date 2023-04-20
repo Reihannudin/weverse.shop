@@ -34,8 +34,29 @@ export const CheckoutListComponent = () => {
         navigate(`?paymentid=${payment.id}`);
     }
 
+    const [address , setAddress] = useState(0);
+    const addressId = searchParams.get("addressid");
+
+    localStorage.setItem('addressId' , addressId)
+
+    const [selectedAddress , setSelectedAddress] = useState(null);
+    const handlerAddressSelect = (address) => {
+        setSelectedAddress(address)
+        navigate(`?addressid=${address.id}`)
+    }
+
+    const [addressDefault , setAddressDefault] = useState([]);
+
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/api/my/${user.id}/default/address/${addressId}`)
+            .then((response) => response.json())
+            .then(addressDefault => setAddressDefault(addressDefault))
+    } , [addressDefault])
+
+    console.log(addressDefault)
+    //
+
     const [listAddress , setListAddress] = useState([]);
-    // http://127.0.0.1:8000/api/my/address/81
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/my/address/${user.id}`)
             .then((response) => response.json())
@@ -171,7 +192,11 @@ export const CheckoutListComponent = () => {
                                                                     <li className="my-4">
                                                                         <div className="flex" style={{ borderBottom:"1px solid #ebebeb"}}>
                                                                             <div className="mx-3 my-auto">
-                                                                                <input className="my-auto" style={{ border:"1px solid #ebebeb"}} type="radio"/>
+                                                                                <input type="radio"
+                                                                                       value={adddress_item.id}
+                                                                                       checked={selectedAddress?.id === adddress_item.id}
+                                                                                       onChange={() => handlerAddressSelect(adddress_item)}
+                                                                                       className="my-auto" style={{ border:"1px solid #ebebeb"}} />
                                                                             </div>
                                                                             <div className="mx-2">
                                                                                 <div className="flex gap-3" style={{color:"#08CCCA"}}>
@@ -182,9 +207,9 @@ export const CheckoutListComponent = () => {
                                                                                     <p style={{ fontSize:"15px"}}>{adddress_item.street},{adddress_item.city}, {adddress_item.state}</p>
                                                                                 </div>
                                                                                 <div>
-                                                                                    <p>15710</p>
-                                                                                    <p>Indonesia</p>
-                                                                                    <p>+62 87773301182</p>
+                                                                                    <p>{adddress_item.postcode}</p>
+                                                                                    <p>{adddress_item.country}</p>
+                                                                                    <p>{adddress_item.phone_number}</p>
                                                                                 </div>
                                                                                 <div className="flex mt-2 mb-4 gap-2">
                                                                                     <button className="py-0.5 px-3" style={{ border:"1px solid #CACACA" , color:"#a8a8a8" , borderRadius:"4px" , fontSize:"15px"}}>Edit</button>
@@ -199,7 +224,7 @@ export const CheckoutListComponent = () => {
                                                     </div>
                                                 </div>
                                                 <div className="mx-6 py-7">
-                                                    <a>
+                                                    <a href={`http://127.0.0.1:8000/api/set/${user.id}/default/${addressId}`}>
                                                         <button className="w-full font-medium py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Save</button>
                                                     </a>
                                                 </div>
@@ -208,26 +233,30 @@ export const CheckoutListComponent = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <div>
-                                        <div className="flex gap-2">
-                                            <p>Andrian </p>
-                                            <p>Raihannudin</p>
-                                        </div>
-                                        <div  className="flex ">
-                                            <p>Grand catania block O5/39, Ciakar, Panongan</p>
-                                            <p>, Kab.Tangerang</p>
-                                            <p>, Banten</p>
-                                        </div>
-                                        <div>
-                                            <p>15710</p>
-                                        </div>
-                                        <div>
-                                            <p>Indonesia</p>
-                                        </div>
-                                        <div>
-                                            <p>+62 87773301182</p>
-                                        </div>
-                                    </div>
+                                    {addressDefault.map((itemAddress) => {
+                                        return(
+                                            <div>
+                                                <div className="flex gap-2">
+                                                    <p>{itemAddress.receiver} </p>
+                                                    <p>{itemAddress.lastname}</p>
+                                                </div>
+                                                <div  className="flex ">
+                                                    <p>{itemAddress.street}</p>
+                                                    <p>, {itemAddress.city}</p>
+                                                    <p>, {itemAddress.state}</p>
+                                                </div>
+                                                <div>
+                                                    <p>{itemAddress.postcode}</p>
+                                                </div>
+                                                <div>
+                                                    <p>{itemAddress.country}</p>
+                                                </div>
+                                                <div>
+                                                    <p>{itemAddress.contact}</p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
                             <div className="my-8">
