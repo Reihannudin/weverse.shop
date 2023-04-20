@@ -25,6 +25,7 @@ import AddPasswordSignUp from "./pages/AddPasswordSignUp";
 import {EditAddressComponent} from "./components/Card/EditAddress.Component";
 import Checkout from "./pages/Checkout";
 import Successfully from "./pages/Successfully";
+import ViewOrder from "./pages/ViewOrder";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
                   <Route path="/order/status/success" element={<Successfully />}></Route>
                   <Route path="/order/checkout/" element={<Checkout />}></Route>
                   <Route path="/order/history" element={<Order />}></Route>
+                  <Route path="/order/history/v/:order_id" element={<ViewOrder />}></Route>
                   <Route path="/order/returnExchange/history" element={<Return />}></Route>
                   <Route path="/support" element={<Support />}></Route>
                   <Route path="/my/addresses" element={<Address />}></Route>
