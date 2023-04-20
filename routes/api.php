@@ -55,6 +55,8 @@ Route::get('/cart/dec/{rows_id}' , [CartController::class , 'cartDecrement']);
 
 //address
 Route::get('/my/address/{user_id}' , [UserController::class , 'address']);
+Route::get('/my/{user_id}/default/address/{rows_id}' , [UserController::class , 'defaultAddress']);
+Route::get('/set/{user_id}/default/{rows_id}' , [UserController::class , 'setDefaultAddress']);
 Route::get('/my/address/new/{user_id}' , [UserController::class , 'addAddress']);
 Route::get('/my/address/edit/{rows_id}' , [UserController::class , 'editAddress']);
 Route::get('/my/address/edit/p/{rows_id}' , [UserController::class , 'editPostAddress']);

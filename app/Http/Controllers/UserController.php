@@ -42,6 +42,27 @@ class UserController extends Controller
 
     }
 
+    public function defaultAddress($user_id , $rows_id){
+
+        $address = Address::query()->where( 'id' , $rows_id)->where('user_id' , $user_id)->get();
+
+        return response()->json($address);
+    }
+
+    public function setDefaultAddress( $user_id, $rows_id){
+
+        Address::query()->where( 'id'  , '!=', $rows_id)->where('user_id'  , '=', $user_id)->update([
+            'isDefault' => 0,
+        ]);
+
+        Address::query()->where( 'id' , $rows_id)->where('user_id' , $user_id)->update([
+            'isDefault' => 1,
+        ]);
+
+        return redirect(env('APP_FE_URL') . '/order/checkout/?addressid=' . $rows_id);
+
+    }
+
     public function editAddress($rows_id){
 
         $address = Address::query()->where('id' , $rows_id)->get();
