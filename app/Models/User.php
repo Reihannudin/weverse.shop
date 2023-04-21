@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function address(){
         return $this->belongsToMany(Address::class);
     }
+
+    public function order(){
+        return $this->HasMany(Order::class);
+    }
 }

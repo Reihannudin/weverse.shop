@@ -22,6 +22,7 @@ class CartResource extends JsonResource
             'product_image' => $this->product->image,
             'product_name' => $this->product->name,
             'product_price' => $this->product->price,
+            'product_bonus' => $this->product->bonus,
             'quantity' => $this->quantity,
             'created_at' => $this->created_at,
             'update_at' => $this->updated_at,

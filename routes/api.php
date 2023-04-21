@@ -44,6 +44,11 @@ Route::get('/payment/{payment_id}' , [OrderController::class , 'paymentShow']);
 Route::get('/shipping' , [OrderController::class , 'shipping']);
 Route::get('/customer/{user_id}' , [UserController::class , 'customer']);
 
+//order
+Route::get('/order/{user_id}' , [OrderController::class , 'order']);
+Route::get('/order/checkout/{user_id}/s' , [OrderController::class , 'postOrder']);
+Route::get('/order/bonus/{user_id}' , [OrderController::class , 'totalBonus']);
+Route::get('/my/cash/{user_id}' , [UserController::class , 'cash']);
 //cart
 Route::get('/cart/{user_id}' , [CartController::class , 'cart']);
 Route::get('/add/{product_id}/to/cart/{user_id}' , [CartController::class , 'addToCart']);

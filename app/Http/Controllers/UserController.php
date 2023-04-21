@@ -15,6 +15,11 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    public function cash($user_id){
+        $cash = User::query()->select('cash')->where('id' , $user_id)->get();
+        return response()->json($cash);
+    }
+
     public function address($user_id){
         $address = Address::query()->where('user_id' , $user_id)->get();
 //        dd($address);

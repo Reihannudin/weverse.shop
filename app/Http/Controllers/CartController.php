@@ -21,6 +21,7 @@ class CartController extends Controller
         return response()->json($cart);
     }
 
+
     public function addToCart(Request $request , $product_id ,$user_id ){
         $qty = $request->query('qty');
         $cart = DB::table('carts')->where('user_id' , $user_id)->where('product_id' , $product_id)->get();
@@ -39,7 +40,6 @@ class CartController extends Controller
                 'created_at' => Carbon::now(),
             ]);
 
-//            $message = "You successfully add product on your cart";
             return back();
         }
 
