@@ -46,6 +46,8 @@ Route::get('/customer/{user_id}' , [UserController::class , 'customer']);
 
 //order
 Route::get('/order/{user_id}' , [OrderController::class , 'order']);
+Route::get('/order/{user_id}/success/{order_id}' , [OrderController::class , 'orderShow']);
+
 Route::get('/order/checkout/{user_id}/s' , [OrderController::class , 'postOrder']);
 Route::get('/order/bonus/{user_id}' , [OrderController::class , 'totalBonus']);
 Route::get('/my/cash/{user_id}' , [UserController::class , 'cash']);

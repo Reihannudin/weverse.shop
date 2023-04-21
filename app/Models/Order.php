@@ -16,13 +16,15 @@ class Order extends Model
             'product_id' );
     }
 
+    public function cart(){
+        return $this->belongsToMany(Cart::class , 'pivot_order_id_cart_id' , 'order_id' ,
+        'cart_id')->select('quantity');
+    }
+
     public function customer(){
         return $this->belongsTo(User::class);
     }
 
-    public function cart(){
-        return $this->belongsTo(Cart::class);
-    }
 
     public function payment(){
         return $this->belongsTo(Payments::class);

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use function Symfony\Component\Translation\t;
 
 class OrderResource extends JsonResource
 {
@@ -18,7 +19,7 @@ class OrderResource extends JsonResource
             'id' => $this->id,
             'product' => $this->product,
             'quantity' => $this->cart,
-//            ],
+            'grand_total' => $this->grand_total,
             'customer_id' => $this->customer->id,
             'customer_email' => $this->customer->email,
             'customer_contact' => $this->customer->phone_number,
@@ -28,6 +29,9 @@ class OrderResource extends JsonResource
             'shipping_id' => $this->shipping->id,
             'shipping_title' => $this->shipping->title,
             'shipping_fee' => $this->shipping->fee,
+            'status_order' => $this->status_order,
+            'shipping_status' => $this->status_shipping,
+            'status_payment' => $this->status_payment,
             'address_id'=> $this->address->id,
             'address_receiver'=> $this->address->receiver,
             'address_lastname'=> $this->address->lastname,
