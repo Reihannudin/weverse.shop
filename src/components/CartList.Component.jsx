@@ -33,7 +33,6 @@ export const CartListComponent = ({user_id}) => {
     }
 
 
-
     const [total , setTotal] = useState('0');
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/cart/total/price/${user_id}`)

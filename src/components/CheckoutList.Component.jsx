@@ -2,6 +2,7 @@
 import {CheckoutProductListComponent} from "./Card/CheckoutProductList.Component";
 import {useEffect, useState } from "react";
 import {useLocation, useNavigate} from "react-router-dom";
+import cart from "../pages/Cart";
 
 
 export const CheckoutListComponent = () => {
@@ -41,26 +42,43 @@ export const CheckoutListComponent = () => {
             .then(customer => setCustomer(customer))
     } , [customer]);
 
+    const [shipping, setShipping] = useState([]);
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/api/shipping`)
+            .then((response) => response.json())
+            .then(shipping => setShipping(shipping))
+    } , [shipping]);
+
+
     const addressId = searchParams.get("addressid");
 
-    localStorage.setItem('addressId' , addressId)
-
-    const [selectedAddress , setSelectedAddress] = useState(null);
+    const [selectedAddress , setSelectedAddress] = useState('1');
     const handlerAddressSelect = (address) => {
         setSelectedAddress(address)
         navigate(`?addressid=${address.id}`)
+        localStorage.setItem('addressId' , address.id)
     }
+
+    const addressIdLS = JSON.parse(localStorage.getItem('addressId'));
+
+    //
+    const [seletectedShipping , setSelectedShipping] = useState(null);
+    const handlerShippingSelect = (shipping) => {
+        setSelectedShipping(shipping)
+        navigate(`?shippingid=${shipping.id}`);
+        localStorage.setItem('shippingId' , shipping.id)
+    }
+    const shippingId = searchParams.get("shippingId");
+
 
     const [addressDefault , setAddressDefault] = useState([]);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/my/${user.id}/default/address/${addressId}`)
+        fetch(`http://127.0.0.1:8000/api/my/${user.id}/default/address/${addressIdLS}`)
             .then((response) => response.json())
             .then(addressDefault => setAddressDefault(addressDefault))
     } , [addressDefault])
 
-    console.log(addressDefault)
-    //
 
     const [listAddress , setListAddress] = useState([]);
     useEffect(() => {
@@ -85,12 +103,24 @@ export const CheckoutListComponent = () => {
             .then(total => setTotal(total))
     } , [total])
 
+    const [bonus , setBonus] = useState([]);
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/api/order/bonus/${user.id}`)
+            .then((response) => response.json())
+            .then(bonus => setBonus(bonus))
+    } , [bonus])
+
+    console.log(bonus)
+    // /my/cash/{user_id}
+
     const [qty , setQty] = useState('0');
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/cart/total/item/${user.id}`)
             .then((response) => response.json())
             .then(qty => setQty(qty))
     } , [qty])
+
+    // http://127.0.0.1:8000/api/order/bonus/81
 
     const popUpAddress = () => {
         const popUp = document.getElementById('pop_up_address')
@@ -109,6 +139,9 @@ export const CheckoutListComponent = () => {
             popUp.style.display = 'none'
         }
     }
+
+    let grandTotalbeforedisc = parseFloat(total) + 47.14
+    let grandTotal = 0;
 
     return(
         <>
@@ -301,33 +334,41 @@ export const CheckoutListComponent = () => {
                                                                 <p>1 item(1.20kg)</p>
                                                             </div>
                                                         </div>
-                                                        <div className="flex gap-3">
-                                                            <div className="my-2.5">
-                                                                <input style={{ width:"22px" ,border:"1px solid #ebebeb"}} type="radio" />
-                                                            </div>
-                                                            <div className="w-5/5">
-                                                                <div className="flex my-2 justify-between" style={{ color:"#08CCCA" , fontSize:"18px"}}>
-                                                                    <div className="text-left">
-                                                                        <p>International Shipping</p>
+                                                        {shipping.map((itemShipping) => {
+                                                            return(
+                                                                <div className="flex gap-3">
+                                                                    <div className="my-2.5">
+                                                                        <input
+                                                                            value={itemShipping.id}
+                                                                            checked={seletectedShipping?.id === itemShipping.id}
+                                                                            onChange={() => handlerShippingSelect(itemShipping)}
+                                                                            style={{ width:"22px" ,border:"1px solid #ebebeb"}} type="radio" />
                                                                     </div>
-                                                                    <div className="text-right">
-                                                                        <p>$47.14</p>
+                                                                    <div className="w-5/5">
+                                                                        <div className="flex my-2 justify-between" style={{ color:"#08CCCA" , fontSize:"18px"}}>
+                                                                            <div className="text-left">
+                                                                                <p>International Shipping</p>
+                                                                            </div>
+                                                                            <div className="text-right">
+                                                                                <p>$47.14</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <p className="my-0 py-0" style={{ fontSize:"14px" , color:"#a9a9a9"}}>
+                                                                            Shipping will usually start within 7 - 14 business days for products.
+                                                                            Once shipping starts, your order can be tracked by following the steps below:
+                                                                            Weverse Shop app > My > My Orders > Order Detail
+                                                                            For pre-orders, the shipping will start on the day indicated in the announcement.
+                                                                            (The shipping fee may vary depending on your area and the volume of the product. Please check the exact shipping fee at checkout.)
+                                                                        </p>
                                                                     </div>
                                                                 </div>
-                                                                <p className="my-0 py-0" style={{ fontSize:"14px" , color:"#a9a9a9"}}>
-                                                                    Shipping will usually start within 7 - 14 business days for products.
-Once shipping starts, your order can be tracked by following the steps below:
-Weverse Shop app > My > My Orders > Order Detail
-For pre-orders, the shipping will start on the day indicated in the announcement.
-(The shipping fee may vary depending on your area and the volume of the product. Please check the exact shipping fee at checkout.)
-                                                                </p>
-                                                            </div>
-                                                        </div>
+                                                            )
+                                                        })}
                                                     </div>
                                                 </div>
                                                 <div className="mx-6 py-7">
-                                                    <a>
-                                                        <button className="w-full font-medium py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Save</button>
+                                                    <a href={`http://localhost:3000/order/checkout`}>
+                                                        <button  className="w-full font-medium py-2.5" style={{ color:"#ffffff" , borderRadius:"4px" , fontSize:"16px" , border:"1px solid #40CDCC" , background:"#08CCCA"}}>Save</button>
                                                     </a>
                                                 </div>
                                             </div>
@@ -365,7 +406,7 @@ For pre-orders, the shipping will start on the day indicated in the announcement
                                                 <div className="my-2">
                                                     <div className="flex gap-2">
                                                         <p style={{ color:"#919191"}}>Available now</p>
-                                                        <p style={{ color:"#3ECCCD"}}>$ ${customerItem.cash}</p>
+                                                        <p style={{ color:"#3ECCCD"}}>$ {customerItem.cash}</p>
                                                     </div>
                                                     <div className="flex gap-2 my-1">
                                                         <input type="radio"/>
@@ -379,6 +420,9 @@ For pre-orders, the shipping will start on the day indicated in the announcement
                             </div>
                         </div>
                         <div className="my-8">
+                            {customer.map((customerItem) => {
+                                grandTotal = grandTotalbeforedisc - customerItem.cash
+                                return(
                             <div>
                                 <div className="my-3 text-left">
                                     <h2 className="font-bold" style={{ fontSize:"20px"}}>Order Summary</h2>
@@ -404,7 +448,7 @@ For pre-orders, the shipping will start on the day indicated in the announcement
                                         <p>Discount (Weverse Shop Cash)</p>
                                     </div>
                                     <div className="text-right">
-                                        <p className="font-bold">$0.00</p>
+                                        <p className="font-bold">$ {customerItem.cash}</p>
                                     </div>
                                 </div>
                                 <div className="flex py-5 mt-6 justify-between" style={{ background:"#FFFEED" , border:"1px solid #F7F6DE" , fontSize:"20px"}}>
@@ -412,7 +456,7 @@ For pre-orders, the shipping will start on the day indicated in the announcement
                                         <p className="font-bold">Grand Total</p>
                                     </div>
                                     <div className="text-right">
-                                        <p className="font-bold">${parseFloat(total) + 47.14}</p>
+                                        <p className="font-bold">${grandTotal}</p>
                                     </div>
                                 </div>
                                 <div className="flex my-3 justify-between" style={{ color:"#05C46B"}} >
@@ -420,10 +464,12 @@ For pre-orders, the shipping will start on the day indicated in the announcement
                                         <p >Earned Weverse Shop Cash</p>
                                     </div>
                                     <div className="text-right">
-                                        <p className="font-bold">$0.20</p>
+                                        <p className="font-bold">${bonus}</p>
                                     </div>
                                 </div>
                             </div>
+                                )
+                            })}
                         </div>
                         <div className="my-8">
                             <div className="text-left">
@@ -500,7 +546,9 @@ For pre-orders, the shipping will start on the day indicated in the announcement
                                     <input style={{ width:"20px"}} type="radio"/>
                                     <p>I agree to all the terms shown above.</p>
                                 </div>
-                                <button className=" my-8 w-2/12 py-3 text-white font-semibold" style={{borderRadius:"4px", background:"#08CCCA"}}>Pay $64.20</button>
+                                <a href={`http://127.0.0.1:8000/api/order/checkout/${user.id}/s/?addressId=${addressIdLS}&shippingId=1&total=${grandTotal}&paymentId=${paymentId}`}>
+                                    <button className=" my-8 w-2/12 py-3 text-white font-semibold" style={{borderRadius:"4px", background:"#08CCCA"}}>Pay ${total}</button>
+                                </a>
                             </div>
                         </div>
                     </div>
