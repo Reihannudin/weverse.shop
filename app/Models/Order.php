@@ -25,9 +25,14 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-
     public function payment(){
         return $this->belongsTo(Payments::class);
+    }
+
+    public function order_shipping(){
+        return $this->belongsToMany(StatusShipping::class , 'orders_id_shippings' , 'order_id' ,
+            'status_shipping_id'
+        );
     }
 
     public function shipping(){

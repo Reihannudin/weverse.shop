@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pivot_orders_id_product_id', function (Blueprint $table) {
+        Schema::create('orders_id_shipping', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('status_shipping_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('orders_id_shipping');
     }
 };
