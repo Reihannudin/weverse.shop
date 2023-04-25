@@ -18,7 +18,7 @@ class Order extends Model
 
     public function cart(){
         return $this->belongsToMany(Cart::class , 'pivot_order_id_cart_id' , 'order_id' ,
-        'cart_id')->select('quantity');
+        'cart_id');
     }
 
     public function customer(){
@@ -29,9 +29,15 @@ class Order extends Model
         return $this->belongsTo(Payments::class);
     }
 
-    public function order_shipping(){
-        return $this->belongsToMany(StatusShipping::class , 'orders_id_shippings' , 'order_id' ,
-            'status_shipping_id'
+    public function status_shipping(){
+        return $this->belongsToMany(Shipping::class , 'pivot_order_id_shipping_id' , 'order_id' ,
+            'shipping_id'
+        );
+    }
+
+    public function status_order(){
+        return $this->belongsToMany(StatusOrder::class , 'pivot_order_id_status_order' , 'order_id' ,
+            'status_order_id'
         );
     }
 

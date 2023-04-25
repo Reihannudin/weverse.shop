@@ -17,7 +17,7 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'product' => $this->product,
+//            'product' => $this->product,
             'quantity' => $this->cart,
             'grand_total' => $this->grand_total,
             'customer_id' => $this->customer->id,
@@ -29,8 +29,8 @@ class OrderResource extends JsonResource
             'shipping_id' => $this->shipping->id,
             'shipping_title' => $this->shipping->title,
             'shipping_fee' => $this->shipping->fee,
-            'status_order' => $this->order_shipping,
-            'shipping_status' => $this->status_shipping_id,
+            'status_order' => $this->status_order,
+            'shipping_status' => $this->status_shipping,
             'status_payment' => $this->status_payment,
             'address_id'=> $this->address->id,
             'address_receiver'=> $this->address->receiver,
@@ -38,6 +38,8 @@ class OrderResource extends JsonResource
             'address_street'=> $this->address->street,
             'address_city'=> $this->address->city,
             'address_state'=> $this->address->state,
+            'address_postcode'=> $this->address->postcode,
+            'address_phone_number' => $this->address->phone_number,
             'address_country'=> $this->address->country,
         ];
     }

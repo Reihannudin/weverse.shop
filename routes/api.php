@@ -34,6 +34,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 });
 
+Route::get('/user/{id}' , [UserController::class , 'getUser']);
+
 Route::get('/logout', function () {
     return "logout";
 });

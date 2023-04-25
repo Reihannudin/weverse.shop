@@ -11,7 +11,9 @@ use App\Models\Order;
 use App\Models\Payments;
 use App\Models\Products;
 use App\Models\Shipping;
+use App\Models\StatusOrder;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -63,10 +65,31 @@ class OrderController extends Controller
             'address_id' => $address,
             'shipping_id' => $shipping,
             'payment_id' => $payment,
-            'status' => $status,
+            'status_payment' => $status,
+            'status_shipping_id' => $status,
+            'status_order_id' => $status,
             'grand_total' => $total,
         ]);
 
+        $status_order = StatusOrder::query()->create([
+            'order_made' => 1,
+            'payment' => 0,
+            'shipping' => 0,
+            'order_arrived' => 0,
+            'review' => 0,
+            'return' => 0,
+            'created_at' => Carbon::now()
+        ]);
+
+        DB::table('pivot_order_id_status_order')->insert([
+            'order_id' => $order->id,
+            'status_order_id' => $status_order->id,
+        ]);
+
+        DB::table('pivot_order_id_shipping_id')->insert([
+            'order_id' => $order->id,
+            'shipping_id' => $shipping,
+        ]);
         $response = [];
 
         foreach ($cart as $item) {
@@ -91,8 +114,8 @@ class OrderController extends Controller
             'pivot_ord_car_id' => $pvt_order_cart[0]->order_id,
         ]);
 
+        return redirect(env('APP_FE_URL') . '/order/status/success?orderId=' . $order->id);
 
-        return response()->json($response);
     }
 
     public function payment(){
